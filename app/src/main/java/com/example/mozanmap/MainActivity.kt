@@ -3,17 +3,20 @@ package com.example.mozanmap
 import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
-import com.example.mozanmap.databinding.ActivityMainBinding
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.example.mozanmap.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var scaleGestureDetector: ScaleGestureDetector
     private var scaleFactor = 1.0f
-    private var focusX = 0f
-    private var focusY = 0f
+    private var lastFocusX = 0f
+    private var lastFocusY = 0f
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,14 +24,32 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // BottomSheetBehaviorの初期化
+        val bottomSheet = binding.bottomSheet
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+
+        // BottomSheetの初期設定
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        // Wi-FiボタンのクリックでBottomSheetを表示
+        binding.buttonWifi.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        // BluetoothボタンでBottomSheetを閉じる
+        binding.buttonBluetooth.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+
+        // スケーリング機能の初期設定
         var dX = 0f
         var dY = 0f
 
-        // ScaleGestureDetectorの初期化
         scaleGestureDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+
             override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
-                focusX = detector.focusX
-                focusY = detector.focusY
+                lastFocusX = detector.focusX
+                lastFocusY = detector.focusY
                 return true
             }
 
@@ -37,24 +58,18 @@ class MainActivity : AppCompatActivity() {
                 scaleFactor *= detector.scaleFactor
                 scaleFactor = scaleFactor.coerceIn(0.1f, 10.0f)
 
-                val focusXDelta = focusX - (binding.imageView.width / 2)
-                val focusYDelta = focusY - (binding.imageView.height / 2)
-
-                binding.imageView.pivotX = focusXDelta / previousScaleFactor
-                binding.imageView.pivotY = focusYDelta / previousScaleFactor
-
-                binding.imageView.scaleX = scaleFactor
-                binding.imageView.scaleY = scaleFactor
+                binding.imageView.apply {
+                    pivotX = detector.focusX
+                    pivotY = detector.focusY
+                    scaleX = scaleFactor
+                    scaleY = scaleFactor
+                }
 
                 return true
             }
-
-            override fun onScaleEnd(detector: ScaleGestureDetector) {
-                super.onScaleEnd(detector)
-                // ここで追加の位置調整を行うことができます
-            }
         })
 
+        // 画像のタッチリスナー設定
         binding.imageView.setOnTouchListener { view, event ->
             scaleGestureDetector.onTouchEvent(event)
             when (event.action) {
@@ -67,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                         view.animate()
                             .x(event.rawX + dX)
                             .y(event.rawY + dY)
-                            .setDuration(0)
+                            .setDuration(10) // 短いがスムーズなアニメーション
                             .start()
                     }
                 }
