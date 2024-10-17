@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -24,41 +25,85 @@
         android:layout_height="50dp"
         android:contentDescription="@null"
         android:gravity="center"
-        android:text="Mozam Map"
+        android:text="@string/app_name"
         android:textColor="#000000"
         android:textSize="40sp"
         android:textStyle="bold"
         android:layout_gravity="top|center_horizontal" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
     <!-- BottomSheetをCoordinatorLayoutの子として配置 -->
     <LinearLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_gravity="bottom"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="0dp"> <!-- layout_gravityをここで使用 -->
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        app:behavior_peekHeight="100dp"
+        android:background="#FF7979"
+        >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <View      android:layout_width="15dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:background="#717171"
+            />
+        <Space
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Control Center"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/button_class"
+            android:background="@drawable/circle_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="@string/button_name1"
+            android:padding="0dp"
             android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/button_wifi"
-            android:layout_width="wrap_content"
+            />
+        <Space
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="閉じる" />
-
+            android:layout_weight="1"
+            />
         <Button
-            android:id="@+id/button_bluetooth"
-            android:layout_width="wrap_content"
+            android:id="@+id/button_food"
+            android:background="@drawable/circle_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="@string/button_name2"
+            android:padding="0dp"
+            android:textSize="20sp"
+            />
+        <Space
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="開く" />
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/button_others"
+            android:background="@drawable/circle_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="@string/button_name3"
+            android:padding="0dp"
+            android:textSize="20sp"
+            />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

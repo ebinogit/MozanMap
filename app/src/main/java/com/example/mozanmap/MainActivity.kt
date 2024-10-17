@@ -1,94 +1,55 @@
 package com.example.mozanmap
 
-import android.annotation.SuppressLint
-import android.view.MotionEvent
-import android.view.ScaleGestureDetector
 import android.os.Bundle
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.example.mozanmap.databinding.ActivityMainBinding
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Toast
+import android.content.Intent
+import com.example.mozanmap.SubActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var scaleGestureDetector: ScaleGestureDetector
-    private var scaleFactor = 1.0f
-    private var lastFocusX = 0f
-    private var lastFocusY = 0f
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    private lateinit var recyclerView: RecyclerView
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        // BottomSheetBehaviorの初期化
-        val bottomSheet = binding.bottomSheet
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        // RecyclerViewのセットアップ
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val items = listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5") // 仮のデータ
+        recyclerView.adapter = SimpleAdapter(items)
 
-        // BottomSheetの初期設定
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        // BottomSheetBehaviorのセットアップ
+        val bottomSheetLayout = findViewById<LinearLayout>(R.id.bottom_sheet)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
 
-        // Wi-FiボタンのクリックでBottomSheetを表示
-        binding.buttonWifi.setOnClickListener {
+        // ボタンのクリックイベントの処理
+        val buttonOpen = findViewById<Button>(R.id.button_class)
+        val buttonClose = findViewById<Button>(R.id.button_food)
+        val buttonToSub: Button = findViewById(R.id.button_others)
+
+// ボタンがクリックされたときの処理
+        buttonToSub.setOnClickListener {
+            // サブ画面 (SubActivity) へ遷移する
+            val intent = Intent(this, SubActivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonOpen.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            Toast.makeText(this, "Bottom Sheet Opened", Toast.LENGTH_SHORT).show()
         }
 
-        // BluetoothボタンでBottomSheetを閉じる
-        binding.buttonBluetooth.setOnClickListener {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        }
-
-        // スケーリング機能の初期設定
-        var dX = 0f
-        var dY = 0f
-
-        scaleGestureDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
-
-            override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
-                lastFocusX = detector.focusX
-                lastFocusY = detector.focusY
-                return true
-            }
-
-            override fun onScale(detector: ScaleGestureDetector): Boolean {
-                val previousScaleFactor = scaleFactor
-                scaleFactor *= detector.scaleFactor
-                scaleFactor = scaleFactor.coerceIn(0.1f, 10.0f)
-
-                binding.imageView.apply {
-                    pivotX = detector.focusX
-                    pivotY = detector.focusY
-                    scaleX = scaleFactor
-                    scaleY = scaleFactor
-                }
-
-                return true
-            }
-        })
-
-        // 画像のタッチリスナー設定
-        binding.imageView.setOnTouchListener { view, event ->
-            scaleGestureDetector.onTouchEvent(event)
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    dX = view.x - event.rawX
-                    dY = view.y - event.rawY
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    if (!scaleGestureDetector.isInProgress) {
-                        view.animate()
-                            .x(event.rawX + dX)
-                            .y(event.rawY + dY)
-                            .setDuration(10) // 短いがスムーズなアニメーション
-                            .start()
-                    }
-                }
-                else -> false
-            }
-            true
+        buttonClose.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            Toast.makeText(this, "Bottom Sheet Closed", Toast.LENGTH_SHORT).show()
         }
     }
 }
