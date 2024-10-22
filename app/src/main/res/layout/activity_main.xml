@@ -47,57 +47,55 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        app:behavior_peekHeight="100dp"
+        app:behavior_peekHeight="120dp"
         android:background="#FF7979"
+        android:paddingTop="5dp"
         >
-
-        <View      android:layout_width="15dp"
-            android:layout_height="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:background="#717171"
-            />
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             />
-        <Button
-            android:id="@+id/button_class"
-            android:background="@drawable/circle_button"
+        <LinearLayout
+            android:id="@+id/button_block"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:text="@string/button_name1"
-            android:padding="0dp"
-            android:textSize="20sp"
-            />
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/button_class"
+                android:background="@drawable/circle_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/class_img"
+                android:scaleType="centerInside"
+                android:contentDescription="@string/button_name1"/>
+        </LinearLayout>
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             />
-        <Button
+        <ImageButton
             android:id="@+id/button_food"
-            android:background="@drawable/circle_button"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:text="@string/button_name2"
-            android:padding="0dp"
-            android:textSize="20sp"
+            android:src="@drawable/food_img"
+            android:scaleType="centerInside"
+            android:background="@drawable/circle_button"
+            android:contentDescription="@string/button_name2"
             />
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             />
-        <Button
+        <ImageButton
             android:id="@+id/button_others"
-            android:background="@drawable/circle_button"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:text="@string/button_name3"
-            android:padding="0dp"
-            android:textSize="20sp"
+            android:src="@drawable/others_img"
+            android:scaleType="centerInside"
+            android:background="@drawable/circle_button"
+            android:contentDescription="@string/button_name3"
             />
         <Space
             android:layout_width="0dp"
