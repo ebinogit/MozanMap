@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import android.content.Intent
+import android.widget.ImageButton
 import com.example.mozanmap.SubActivity
 
 class MainActivity : AppCompatActivity() {
@@ -31,9 +32,9 @@ class MainActivity : AppCompatActivity() {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
 
         // ボタンのクリックイベントの処理
-        val buttonOpen = findViewById<Button>(R.id.button_class)
-        val buttonClose = findViewById<Button>(R.id.button_food)
-        val buttonToSub: Button = findViewById(R.id.button_others)
+        val buttonOpen = findViewById<ImageButton>(R.id.button_class)
+        val buttonClose = findViewById<ImageButton>(R.id.button_food)
+        val buttonToSub: ImageButton = findViewById(R.id.button_others)
 
 // ボタンがクリックされたときの処理
         buttonToSub.setOnClickListener {
