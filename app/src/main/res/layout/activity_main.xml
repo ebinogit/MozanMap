@@ -17,7 +17,7 @@
         android:scaleY="3"
         android:src="@drawable/map"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/text_view"
@@ -29,7 +29,7 @@
         android:textColor="#000000"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:layout_gravity="top|center_horizontal" />
+        android:layout_gravity="center_horizontal" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -57,9 +57,11 @@
             android:layout_weight="1"
             />
         <LinearLayout
-            android:id="@+id/button_block"
+            android:id="@+id/button_block1"
             android:layout_width="80dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
             <ImageButton
                 android:id="@+id/button_class"
                 android:background="@drawable/circle_button"
@@ -67,36 +69,69 @@
                 android:layout_height="80dp"
                 android:src="@drawable/class_img"
                 android:scaleType="centerInside"
-                android:contentDescription="@string/button_name1"/>
+                android:importantForAccessibility="no"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/button_name1"
+                android:textSize="20sp"
+                android:gravity="center"
+                />
         </LinearLayout>
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             />
-        <ImageButton
-            android:id="@+id/button_food"
+        <LinearLayout
+            android:id="@+id/button_block2"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/food_img"
-            android:scaleType="centerInside"
-            android:background="@drawable/circle_button"
-            android:contentDescription="@string/button_name2"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <ImageButton
+                android:id="@+id/button_food"
+                android:background="@drawable/circle_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/food_img"
+                android:scaleType="centerInside"
+                android:importantForAccessibility="no"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/button_name2"
+                android:textSize="20sp"
+                android:gravity="center"
+                />
+        </LinearLayout>
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             />
-        <ImageButton
-            android:id="@+id/button_others"
+        <LinearLayout
+            android:id="@+id/button_block3"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/others_img"
-            android:scaleType="centerInside"
-            android:background="@drawable/circle_button"
-            android:contentDescription="@string/button_name3"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <ImageButton
+                android:id="@+id/button_others"
+                android:background="@drawable/circle_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/others_img"
+                android:scaleType="centerInside"
+                android:importantForAccessibility="no"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/button_name3"
+                android:textSize="20sp"
+                android:gravity="center"
+                />
+        </LinearLayout>
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
