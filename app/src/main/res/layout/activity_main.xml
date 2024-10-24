@@ -38,105 +38,130 @@
         android:layout_weight="1"
         android:scrollbars="vertical"
         android:padding="16dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
     <!-- BottomSheetをCoordinatorLayoutの子として配置 -->
     <LinearLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        app:behavior_peekHeight="120dp"
+        app:behavior_peekHeight="220dp"
         android:background="#FF7979"
-        android:paddingTop="5dp"
-        >
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
-        <LinearLayout
-            android:id="@+id/button_block1"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <ImageButton
-                android:id="@+id/button_class"
-                android:background="@drawable/circle_button"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/class_img"
-                android:scaleType="centerInside"
-                android:importantForAccessibility="no"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_name1"
-                android:textSize="20sp"
-                android:gravity="center"
-                />
-        </LinearLayout>
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
-        <LinearLayout
-            android:id="@+id/button_block2"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <ImageButton
-                android:id="@+id/button_food"
-                android:background="@drawable/circle_button"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/food_img"
-                android:scaleType="centerInside"
-                android:importantForAccessibility="no"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_name2"
-                android:textSize="20sp"
-                android:gravity="center"
-                />
-        </LinearLayout>
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
-        <LinearLayout
-            android:id="@+id/button_block3"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <ImageButton
-                android:id="@+id/button_others"
-                android:background="@drawable/circle_button"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/others_img"
-                android:scaleType="centerInside"
-                android:importantForAccessibility="no"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_name3"
-                android:textSize="20sp"
-                android:gravity="center"
-                />
-        </LinearLayout>
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
+        android:paddingTop="5dp">
 
+        <LinearLayout
+            android:id="@+id/view_block1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/button_block1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/button_class"
+                    android:background="@drawable/circle_button"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/class_img"
+                    android:scaleType="centerInside"
+                    android:importantForAccessibility="no"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_name1"
+                    android:textSize="20sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/button_block2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/button_food"
+                    android:background="@drawable/circle_button"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/food_img"
+                    android:scaleType="centerInside"
+                    android:importantForAccessibility="no"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_name2"
+                    android:textSize="20sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/button_block3"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/button_others"
+                    android:background="@drawable/circle_button"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/others_img"
+                    android:scaleType="centerInside"
+                    android:importantForAccessibility="no"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_name3"
+                    android:textSize="20sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/button_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/button_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:columnCount="2"
+                app:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_gravity="bottom|center_horizontal">
+            </androidx.gridlayout.widget.GridLayout>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
