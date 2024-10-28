@@ -15,6 +15,15 @@
         android:textSize="50sp" />
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="サンプルテキスト"
+        android:textSize="18sp"
+        android:layout_gravity="center"/>
+
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="場所"

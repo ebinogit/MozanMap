@@ -39,12 +39,6 @@ class MainActivity : AppCompatActivity() {
         val buttonClose = findViewById<ImageButton>(R.id.button_food)
         val buttonToSub = findViewById<ImageButton>(R.id.button_others)
 
-        // サブ画面 (SubActivity) へ遷移する
-        buttonToSub.setOnClickListener {
-            val intent = Intent(this, SubActivity::class.java)
-            startActivity(intent)
-        }
-
         buttonOpen.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             Toast.makeText(this, "Bottom Sheet Opened", Toast.LENGTH_SHORT).show()
@@ -58,24 +52,26 @@ class MainActivity : AppCompatActivity() {
         // GridLayoutの取得
         buttonGrid = findViewById(R.id.button_grid)
 
-        // ボタンを2列3行で追加する
-        val totalButtons = 6  // 2列3行でボタン6個
+        // ボタンを追加する (20個)
+        val totalButtons = 20
         for (i in 0 until totalButtons) {
             val button = Button(this).apply {
                 text = "Button ${i + 1}"
                 layoutParams = GridLayout.LayoutParams().apply {
-                    width = 0  // 重みを使用するため幅を0に設定
+                    width = 0
                     height = GridLayout.LayoutParams.WRAP_CONTENT
-                    columnSpec = GridLayout.spec(i % 2, 1f)  // 列の指定（2列）
-                    rowSpec = GridLayout.spec(i / 2)  // 行の指定
-                    setGravity(Gravity.FILL_HORIZONTAL)  // 水平方向に埋める
+                    columnSpec = GridLayout.spec(i % 2, 1f)
+                    rowSpec = GridLayout.spec(i / 2)
+                    setGravity(Gravity.FILL_HORIZONTAL)
                 }
                 setOnClickListener {
-                    Toast.makeText(this@MainActivity, "Button ${i + 1} clicked!", Toast.LENGTH_SHORT)
-                        .show()
+                    // 各ボタンがクリックされたときに SubActivity にボタンのインデックスを渡す
+                    val intent = Intent(this@MainActivity, SubActivity::class.java)
+                    intent.putExtra("button_id", i)
+                    startActivity(intent)
                 }
             }
-            buttonGrid.addView(button)  // GridLayoutにボタンを追加
+            buttonGrid.addView(button)
         }
     }
 }
