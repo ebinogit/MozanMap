@@ -11,7 +11,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import android.content.Intent
-import android.view.Gravity
+import com.example.mozanmap.data.ButtonInfo
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,21 +53,27 @@ class MainActivity : AppCompatActivity() {
         buttonGrid = findViewById(R.id.button_grid)
 
         // ボタンを追加する (20個)
+        // 生成するボタンの数を指定
         val totalButtons = 20
         for (i in 0 until totalButtons) {
+            // ボタン情報を生成
+            val buttonInfo = ButtonInfo(
+                id = i
+            )
+
+            // ボタンを作成
             val button = Button(this).apply {
-                text = "Button ${i + 1}"
+                text = buttonInfo.id.toString()
                 layoutParams = GridLayout.LayoutParams().apply {
                     width = 0
                     height = GridLayout.LayoutParams.WRAP_CONTENT
-                    columnSpec = GridLayout.spec(i % 2, 1f)
+                    columnSpec = GridLayout.spec(i % 2, 1f) // 2列レイアウト
                     rowSpec = GridLayout.spec(i / 2)
-                    setGravity(Gravity.FILL_HORIZONTAL)
                 }
                 setOnClickListener {
-                    // 各ボタンがクリックされたときに SubActivity にボタンのインデックスを渡す
+                    // クリックされたときにSubActivityにデータを渡す
                     val intent = Intent(this@MainActivity, SubActivity::class.java)
-                    intent.putExtra("button_id", i)
+                    intent.putExtra("button_content", buttonInfo.id) // ボタンの内容を渡す
                     startActivity(intent)
                 }
             }
