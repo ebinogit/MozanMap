@@ -1,17 +1,16 @@
 package com.example.mozanmap
 
 import android.os.Bundle
+import android.content.Intent
+import android.util.Log
+import android.widget.Button
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.gridlayout.widget.GridLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import android.widget.Button
-import androidx.gridlayout.widget.GridLayout
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.Toast
-import android.content.Intent
 import com.example.mozanmap.data.ButtonInfo
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,52 +31,42 @@ class MainActivity : AppCompatActivity() {
         // BottomSheetBehaviorのセットアップ
         val bottomSheetLayout = findViewById<LinearLayout>(R.id.bottom_sheet)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED // 初期状態で展開
-
-        // ボタンのクリックイベントの処理
-        val buttonOpen = findViewById<ImageButton>(R.id.button_class)
-        val buttonClose = findViewById<ImageButton>(R.id.button_food)
-        val buttonToSub = findViewById<ImageButton>(R.id.button_others)
-
-        buttonOpen.setOnClickListener {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            Toast.makeText(this, "Bottom Sheet Opened", Toast.LENGTH_SHORT).show()
-        }
-
-        buttonClose.setOnClickListener {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            Toast.makeText(this, "Bottom Sheet Closed", Toast.LENGTH_SHORT).show()
-        }
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
         // GridLayoutの取得
         buttonGrid = findViewById(R.id.button_grid)
 
-        // ボタンを追加する (20個)
-        // 生成するボタンの数を指定
-        val totalButtons = 20
-        for (i in 0 until totalButtons) {
-            // ボタン情報を生成
-            val buttonInfo = ButtonInfo(
-                id = i
-            )
+        // ボタン情報リスト
+        val buttonList = listOf(
+            ButtonInfo(0, "えび", "えびの情報", R.drawable.ebiebi),
+            ButtonInfo(1, "かず", "かずの情報", R.drawable.kazoo)
+            // 他のボタンも同様に定義
+        )
 
-            // ボタンを作成
+        // ボタンを追加
+        for (buttonInfo in buttonList) {
             val button = Button(this).apply {
-                text = buttonInfo.id.toString()
+                text = buttonInfo.title  // ボタンのタイトルを設定
                 layoutParams = GridLayout.LayoutParams().apply {
                     width = 0
                     height = GridLayout.LayoutParams.WRAP_CONTENT
-                    columnSpec = GridLayout.spec(i % 2, 1f) // 2列レイアウト
-                    rowSpec = GridLayout.spec(i / 2)
+                    columnSpec = GridLayout.spec(buttonInfo.id % 2, 1f) // 列の設定
+                    rowSpec = GridLayout.spec(buttonInfo.id / 2)  // 行の設定
                 }
                 setOnClickListener {
-                    // クリックされたときにSubActivityにデータを渡す
-                    val intent = Intent(this@MainActivity, SubActivity::class.java)
-                    intent.putExtra("button_content", buttonInfo.id) // ボタンの内容を渡す
+                    Log.d("MainActivity", "Button ${buttonInfo.id} clicked, imageResId: ${buttonInfo.imageResId}")
+
+                    // SubActivityに渡すためのIntentを作成
+                    val intent = Intent(this@MainActivity, SubActivity::class.java).apply {
+                        putExtra("button_content", buttonInfo.content)  // ここはString型
+                        putExtra("image_res_id", buttonInfo.imageResId) // ここはInt型
+                    }
+
+                    // SubActivityを開始
                     startActivity(intent)
                 }
             }
-            buttonGrid.addView(button)
+            buttonGrid.addView(button) // GridLayoutにボタンを追加
         }
     }
 }
