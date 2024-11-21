@@ -1,7 +1,7 @@
 package com.example.mozanmap
 
-import android.os.Bundle
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.gridlayout.widget.GridLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mozanmap.data.ButtonInfo
+import com.example.mozanmap.data.ButtonData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainActivity : AppCompatActivity() {
@@ -36,37 +36,38 @@ class MainActivity : AppCompatActivity() {
         // GridLayoutの取得
         buttonGrid = findViewById(R.id.button_grid)
 
-        // ボタン情報リスト
-        val buttonList = listOf(
-            ButtonInfo(0, "えび", "えびの情報", R.drawable.ebiebi),
-            ButtonInfo(1, "かず", "かずの情報", R.drawable.kazoo)
-            // 他のボタンも同様に定義
-        )
+        // ButtonData からボタンリストを取得
+        val buttonList = ButtonData.buttonList
 
-        // ボタンを追加
+        // ボタンを GridLayout に追加
         for (buttonInfo in buttonList) {
             val button = Button(this).apply {
-                text = buttonInfo.title  // ボタンのタイトルを設定
+                text = buttonInfo.title
                 layoutParams = GridLayout.LayoutParams().apply {
                     width = 0
                     height = GridLayout.LayoutParams.WRAP_CONTENT
                     columnSpec = GridLayout.spec(buttonInfo.id % 2, 1f) // 列の設定
-                    rowSpec = GridLayout.spec(buttonInfo.id / 2)  // 行の設定
+                    rowSpec = GridLayout.spec(buttonInfo.id / 2) // 行の設定
                 }
                 setOnClickListener {
-                    Log.d("MainActivity", "Button ${buttonInfo.id} clicked, imageResId: ${buttonInfo.imageResId}")
+                    Log.d("MainActivity", "Button ${buttonInfo.id} clicked")
 
-                    // SubActivityに渡すためのIntentを作成
+                    // SubActivity に渡すための Intent を作成
                     val intent = Intent(this@MainActivity, SubActivity::class.java).apply {
-                        putExtra("button_content", buttonInfo.content)  // ここはString型
-                        putExtra("image_res_id", buttonInfo.imageResId) // ここはInt型
+                        putExtra("title", buttonInfo.title)
+                        putExtra("content", buttonInfo.content)
+                        putExtra("imageResId", buttonInfo.imageResId)
+                        putExtra("address", buttonInfo.address)
+                        putExtra("hours", buttonInfo.hours)
+                        putExtra("website", buttonInfo.website)
+                        putExtra("phone", buttonInfo.phone)
                     }
 
-                    // SubActivityを開始
+                    // SubActivity を開始
                     startActivity(intent)
                 }
             }
-            buttonGrid.addView(button) // GridLayoutにボタンを追加
+            buttonGrid.addView(button)
         }
     }
 }
