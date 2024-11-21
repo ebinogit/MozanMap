@@ -26,6 +26,26 @@ object ButtonData {
             hours = "10:00 - 20:00",
             website = "https://example.com/kazu",
             phone = "03-9876-5432"
+        ),
+        ButtonInfo(
+            id = 2,
+            title = "マクドナルド",
+            content = "マクドナルドの情報",
+            imageResId = R.drawable.makku,
+            address = "",
+            hours = "10:00 - 20:00",
+            website = "https://example.com/kazu",
+            phone = "03-9876-5432"
+        ),
+        ButtonInfo(
+            id = 3,
+            title = "吉野家",
+            content = "吉野家の情報",
+            imageResId = R.drawable.yoshino,
+            address = "",
+            hours = "10:00 - 20:00",
+            website = "https://www.yoshinoya.com/",
+            phone = "03-9876-5432"
         )
     )
 }
