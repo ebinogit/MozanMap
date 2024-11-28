@@ -34,7 +34,7 @@ class SubActivity : AppCompatActivity() {
         // 各TextViewとImageViewを取得
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
         val contentTextView = findViewById<TextView>(R.id.contentTextView)
-        val addressTextView = findViewById<TextView>(R.id.addressTextView)
+        //val addressTextView = findViewById<TextView>(R.id.addressTextView)
         val hoursTextView = findViewById<TextView>(R.id.hoursTextView)
         val websiteTextView = findViewById<TextView>(R.id.websiteTextView)
         val phoneTextView = findViewById<TextView>(R.id.phoneTextView)
@@ -43,7 +43,7 @@ class SubActivity : AppCompatActivity() {
         // 取得したデータを各Viewにセット
         titleTextView.text = title ?: "タイトルがありません"
         contentTextView.text = content ?: "内容がありません"
-        addressTextView.text = address ?: "住所がありません"
+        //addressTextView.text = address ?: "住所がありません"
         hoursTextView.text = hours ?: "営業時間がありません"
         websiteTextView.text = website ?: "ウェブサイトがありません"
         phoneTextView.text = phone ?: "電話番号がありません"
