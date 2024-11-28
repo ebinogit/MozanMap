@@ -22,16 +22,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // RecyclerViewのセットアップ
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        val items = listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5") // 仮のデータ
-        recyclerView.adapter = SimpleAdapter(items)
-
         // BottomSheetBehaviorのセットアップ
         val bottomSheetLayout = findViewById<LinearLayout>(R.id.bottom_sheet)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         // GridLayoutの取得
         buttonGrid = findViewById(R.id.button_grid)

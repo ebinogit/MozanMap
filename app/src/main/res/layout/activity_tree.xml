@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#FFFFFF">
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFF6C"
+        android:padding="5dp"
+        >
+        <Button
+            android:id="@+id/button_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日"
+            />
+        <Button
+            android:id="@+id/button_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日"
+            />
+        <Button
+            android:id="@+id/button_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="月"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="カレンダー"
+        android:textSize="50sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="表示画像" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:layout_margin="20dp"/> <!-- 20px -> 20dp に修正 -->
+
+
+
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="メイン画面に戻る"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

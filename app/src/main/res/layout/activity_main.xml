@@ -8,17 +8,23 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:contentDescription="@null"-->
+<!--        android:scaleX="3"-->
+<!--        android:scaleY="3"-->
+<!--        android:src="@drawable/map"-->
+<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+<!--        android:layout_gravity="center"/>-->
+
+    <com.example.mozanmap.CustomImageView
+        android:id="@+id/customImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@null"
-        android:scaleX="3"
-        android:scaleY="3"
         android:src="@drawable/map"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_gravity="center"/>
-
+        />
     <TextView
         android:id="@+id/text_view"
         android:layout_width="250dp"
@@ -31,14 +37,14 @@
         android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbars="vertical"
-        android:padding="16dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:scrollbars="vertical"-->
+<!--        android:padding="16dp"-->
+<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
 
     <!-- BottomSheetをCoordinatorLayoutの子として配置 -->
     <LinearLayout
@@ -49,7 +55,8 @@
         app:layout_behavior="@string/bottom_sheet_behavior"
         app:behavior_peekHeight="220dp"
         android:background="#FF7979"
-        android:paddingTop="5dp">
+        android:paddingTop="5dp"
+        >
 
         <LinearLayout
             android:id="@+id/view_block1"
@@ -57,7 +64,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Space
+            <android.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
@@ -85,7 +92,7 @@
                     android:gravity="center"/>
             </LinearLayout>
 
-            <Space
+            <android.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
@@ -113,7 +120,7 @@
                     android:gravity="center"/>
             </LinearLayout>
 
-            <Space
+            <android.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
@@ -141,7 +148,7 @@
                     android:gravity="center"/>
             </LinearLayout>
 
-            <Space
+            <android.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
@@ -160,7 +167,8 @@
                 app:columnCount="2"
                 app:orientation="horizontal"
                 android:padding="16dp"
-                android:layout_gravity="bottom|center_horizontal">
+                android:layout_gravity="bottom|center_horizontal"
+                >
             </androidx.gridlayout.widget.GridLayout>
         </LinearLayout>
     </LinearLayout>
