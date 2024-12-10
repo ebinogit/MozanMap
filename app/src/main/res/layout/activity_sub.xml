@@ -1,127 +1,171 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop" />
-
-
-
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center_vertical">
-    <ImageView
-        android:id="@+id/icon_image"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/pin"
-        android:contentDescription="アイコン画像"
-        android:layout_marginEnd="8dp" />
-
-    <TextView
-        android:id="@+id/contentTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp" />
-</LinearLayout>
-
-<!--    <TextView-->
-<!--        android:id="@+id/addressTextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:layout_marginTop="8dp" />-->
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        <!-- 画像表示用ImageView -->
         <ImageView
-            android:id="@+id/icon_hours"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/pin"
-            android:contentDescription="アイコン画像"
-            android:layout_marginEnd="8dp" />
-    <TextView
-        android:id="@+id/hoursTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp" />
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="画像の説明" />
+
+        <!-- タイトルTextView -->
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp" />
+
+        <!-- コメント表示部分（RecyclerViewを使用） -->
+
+
+        <!-- その他情報 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <!-- アイコン付き情報 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/icon_image"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/pin"
+                    android:contentDescription="アイコン画像"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/contentTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- 営業時間 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/icon_hours"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/pin"
+                    android:contentDescription="アイコン画像"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/hoursTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- ウェブサイト -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/icon_website"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/pin"
+                    android:contentDescription="アイコン画像"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/websiteTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- 電話番号 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/icon_phone"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/pin"
+                    android:contentDescription="アイコン画像"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/phoneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="phone"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/commentsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#EFEFEF"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 内容表示用EditText -->
+            <EditText
+                android:id="@+id/commentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ここに内容を入力します"
+                android:layout_marginTop="8dp"
+                android:minHeight="48dp"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <!-- コメント追加ボタン -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+<!--            <Button-->
+<!--                android:id="@+id/add_comment_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="コメントを追加"-->
+<!--                android:layout_marginEnd="8dp" />-->
+
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="コメントを追加"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/button_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="戻る" />
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-        <ImageView
-            android:id="@+id/icon_website"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/pin"
-            android:contentDescription="アイコン画像"
-            android:layout_marginEnd="8dp" />
-
-    <TextView
-        android:id="@+id/websiteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-        <ImageView
-            android:id="@+id/icon_phone"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/pin"
-            android:contentDescription="アイコン画像"
-            android:layout_marginEnd="8dp" />
-
-    <TextView
-        android:id="@+id/phoneTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoLink="phone"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="戻る" />
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
