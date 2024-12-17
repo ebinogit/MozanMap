@@ -57,10 +57,17 @@ class SubActivity : AppCompatActivity() {
         commentsRecyclerView.addItemDecoration(dividerItemDecoration)
 
         // Firebaseの参照を取得
-        commentsRef = FirebaseDatabase.getInstance().getReference("comments").child("button_$buttonId")
+        // Firebaseの参照を取得
+        commentsRef = FirebaseDatabase.getInstance("https://mozanmap-4e6a4-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference("comments")
+            .child("button_$buttonId")
+
 
         // Firebaseからコメントを取得
         loadComments()
+
+        // Firebase接続確認
+        checkFirebaseConnection()
 
         // 保存ボタンの設定
         val saveButton = findViewById<Button>(R.id.button_save)
@@ -80,7 +87,7 @@ class SubActivity : AppCompatActivity() {
         }
 
         // 戻るボタンの設定
-        val buttonBack = findViewById<Button>(R.id.button_back)
+        val buttonBack = findViewById<ImageButton>(R.id.button_back)
         buttonBack.setOnClickListener {
             finish()
         }
@@ -100,6 +107,24 @@ class SubActivity : AppCompatActivity() {
             override fun onChildRemoved(snapshot: DataSnapshot) {}
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+    private fun checkFirebaseConnection() {
+        val database = FirebaseDatabase.getInstance()
+        database.getReference(".info/connected").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val connected = snapshot.getValue(Boolean::class.java) ?: false
+//                if (connected) {
+//                    Toast.makeText(this@SubActivity, "Firebaseに接続されています", Toast.LENGTH_SHORT).show()
+//                } else {
+//                    Toast.makeText(this@SubActivity, "Firebaseに接続されていません", Toast.LENGTH_SHORT).show()
+//                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@SubActivity, "接続チェックがキャンセルされました: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
         })
     }
 }

@@ -10,6 +10,15 @@
         android:padding="16dp">
 
         <!-- 画像表示用ImageView -->
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="43dp"
+            android:layout_height="40dp"
+            android:layout_margin="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="戻る"
+            android:src="@drawable/batu" />
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
@@ -161,11 +170,6 @@
                 android:text="コメントを追加"
                 android:layout_marginEnd="8dp" />
 
-            <Button
-                android:id="@+id/button_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="戻る" />
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

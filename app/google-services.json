@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "390101240375",
+    "firebase_url": "https://mozanmap-4e6a4-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "mozanmap-4e6a4",
     "storage_bucket": "mozanmap-4e6a4.firebasestorage.app"
   },

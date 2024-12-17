@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                     columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f) // 幅を均等配分
                     rowSpec = GridLayout.spec(GridLayout.UNDEFINED) // 自動配置
                 }
-                tag = "button_${buttonInfo.id}" // タグを設定
+                tag = buttonInfo.id // IDをタグとして設定
                 setOnClickListener {
                     Log.d("MainActivity", "Button ${buttonInfo.id} clicked")
 
@@ -103,9 +103,14 @@ class MainActivity : AppCompatActivity() {
                     val comment = child.child("text").getValue(String::class.java)
                     comment?.let { comments.add(it) }
                 }
-                // ボタンに最新コメントとコメント件数を表示
-                val latestComment = if (comments.isNotEmpty()) comments.last() else "コメントなし"
-                button.text = "${button.tag}: $latestComment (${comments.size}件)"
+
+                // ボタンのタイトルを buttonList から取得
+                val buttonInfo = buttonList.find { it.id == buttonId }
+                val buttonTitle = buttonInfo?.title ?: "ボタン$buttonId" // タイトルを取得
+
+                // 最新コメントとコメント件数をボタンに設定
+//                val latestComment = if (comments.isNotEmpty()) comments.last() else "コメントなし"
+//                button.text = "$buttonTitle: $latestComment (${comments.size}件)"
             }
 
             override fun onCancelled(error: DatabaseError) {
