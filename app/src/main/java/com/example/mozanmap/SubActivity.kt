@@ -1,19 +1,25 @@
 package com.example.mozanmap
 
+import CommentAdapter
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class SubActivity : AppCompatActivity() {
 
     private lateinit var commentsRef: DatabaseReference
+    private lateinit var usersRef: DatabaseReference
     private lateinit var commentsRecyclerView: RecyclerView
     private lateinit var commentAdapter: CommentAdapter
     private val commentList = mutableListOf<String>()
+    private val commentKeyMap = mutableMapOf<Int, String>() // コメントとキーの対応付け
+
+    private var isAdmin = false // 管理者判定
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,48 +54,78 @@ class SubActivity : AppCompatActivity() {
 
         // RecyclerViewのセットアップ
         commentsRecyclerView = findViewById(R.id.commentsRecyclerView)
-        commentAdapter = CommentAdapter(commentList)
+        commentAdapter = CommentAdapter(commentList, onDeleteClicked = { position ->
+            if (isAdmin) {
+                // インデックスが有効か確認
+                if (position >= 0 && position < commentList.size) {
+                    val key = commentKeyMap[position]
+                    if (key != null) {
+                        // Firebaseからコメント削除
+                        commentsRef.child(key).removeValue()
+                        // ローカルリストから削除
+                        commentList.removeAt(position)
+                        // キーマップから削除
+                        commentKeyMap.remove(position)
+                        // RecyclerViewを更新
+                        commentAdapter.notifyItemRemoved(position)
+                        Toast.makeText(this, "コメントを削除しました", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "無効なインデックスです", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "削除権限がありません", Toast.LENGTH_SHORT).show()
+            }
+        })
         commentsRecyclerView.layoutManager = LinearLayoutManager(this)
         commentsRecyclerView.adapter = commentAdapter
+        commentsRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
-        // DividerItemDecorationを使用して仕切り線を追加
-        val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
-        commentsRecyclerView.addItemDecoration(dividerItemDecoration)
-
-        // Firebaseの参照を取得
         // Firebaseの参照を取得
         commentsRef = FirebaseDatabase.getInstance("https://mozanmap-4e6a4-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference("comments")
             .child("button_$buttonId")
 
+        usersRef = FirebaseDatabase.getInstance("https://mozanmap-4e6a4-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference("users")
 
-        // Firebaseからコメントを取得
+        // ユーザーが管理者かどうかを確認
+        checkAdminStatus()
+
+        // コメントの読み込み
         loadComments()
 
-        // Firebase接続確認
-        checkFirebaseConnection()
-
-        // 保存ボタンの設定
+        // コメントの保存
         val saveButton = findViewById<Button>(R.id.button_save)
         saveButton.setOnClickListener {
             val updatedComment = commentEditText.text.toString()
-
-            // 新しいコメントをFirebaseに追加
             if (updatedComment.isNotEmpty()) {
                 commentsRef.push().setValue(updatedComment)
-
-                // 入力フィールドを空に
                 commentEditText.text.clear()
-
-                // 保存完了の通知
                 Toast.makeText(this, "コメントを保存しました", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // 戻るボタンの設定
+        // 戻るボタン
         val buttonBack = findViewById<ImageButton>(R.id.button_back)
         buttonBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun checkAdminStatus() {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let { user ->
+            usersRef.child(user.uid).child("isAdmin").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    isAdmin = snapshot.getValue(Boolean::class.java) == true
+                    commentAdapter.setAdminStatus(isAdmin)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@SubActivity, "管理者権限の確認に失敗しました", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
 
@@ -97,34 +133,29 @@ class SubActivity : AppCompatActivity() {
         commentsRef.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val comment = snapshot.getValue(String::class.java)
-                comment?.let {
-                    commentList.add(it)
-                    commentAdapter.notifyDataSetChanged()  // コメント追加後にRecyclerViewを更新
+                val key = snapshot.key
+                if (comment != null && key != null) {
+                    commentList.add(comment)
+                    commentKeyMap[commentList.size - 1] = key
+                    commentAdapter.notifyDataSetChanged()
                 }
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
-            override fun onChildRemoved(snapshot: DataSnapshot) {}
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                val key = snapshot.key
+                if (key != null) {
+                    val position = commentKeyMap.values.indexOf(key)
+                    if (position >= 0) {
+                        commentList.removeAt(position)
+                        commentKeyMap.remove(position)
+                        commentAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
-        })
-    }
-
-    private fun checkFirebaseConnection() {
-        val database = FirebaseDatabase.getInstance()
-        database.getReference(".info/connected").addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val connected = snapshot.getValue(Boolean::class.java) ?: false
-//                if (connected) {
-//                    Toast.makeText(this@SubActivity, "Firebaseに接続されています", Toast.LENGTH_SHORT).show()
-//                } else {
-//                    Toast.makeText(this@SubActivity, "Firebaseに接続されていません", Toast.LENGTH_SHORT).show()
-//                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@SubActivity, "接続チェックがキャンセルされました: ${error.message}", Toast.LENGTH_SHORT).show()
-            }
         })
     }
 }
