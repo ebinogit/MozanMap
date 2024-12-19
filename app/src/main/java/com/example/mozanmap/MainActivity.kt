@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.gridlayout.widget.GridLayout
 import com.example.mozanmap.data.ButtonData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
             result.data?.let { data ->
                 val buttonId = data.getIntExtra("buttonId", -1)
                 val newComment = data.getStringExtra("newComment") ?: ""
-                // Firebaseに新しいコメントを追加
                 if (buttonId != -1 && newComment.isNotEmpty()) {
                     val commentData = mapOf(
                         "username" to "YourUsername",
@@ -42,6 +42,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Firebase Authentication のインスタンスを取得
+        val auth = FirebaseAuth.getInstance()
+
+        // ログイン状態の確認
+        if (auth.currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_main)
 
         // Firebaseの初期化
@@ -50,29 +61,28 @@ class MainActivity : AppCompatActivity() {
 
         // GridLayoutの取得と列数の設定
         buttonGrid = findViewById(R.id.button_grid)
-        buttonGrid.columnCount = 2 // 2列に設定
+        buttonGrid.columnCount = 2
 
         // グリッドボタンをセットアップ
         setupGridButtons()
     }
 
     private fun setupGridButtons() {
-        buttonGrid.removeAllViews() // 既存のボタンをすべて削除
+        buttonGrid.removeAllViews()
 
         for (buttonInfo in buttonList) {
             val button = Button(this).apply {
-                text = buttonInfo.title // ボタンのタイトル
+                text = buttonInfo.title
                 layoutParams = GridLayout.LayoutParams().apply {
-                    width = 0 // 重み付けで幅を調整
+                    width = 0
                     height = GridLayout.LayoutParams.WRAP_CONTENT
-                    columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f) // 幅を均等配分
-                    rowSpec = GridLayout.spec(GridLayout.UNDEFINED) // 自動配置
+                    columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                    rowSpec = GridLayout.spec(GridLayout.UNDEFINED)
                 }
-                tag = buttonInfo.id // IDをタグとして設定
+                tag = buttonInfo.id
                 setOnClickListener {
                     Log.d("MainActivity", "Button ${buttonInfo.id} clicked")
 
-                    // SubActivityに渡すIntentを作成
                     val intent = Intent(this@MainActivity, SubActivity::class.java).apply {
                         putExtra("buttonId", buttonInfo.id)
                         putExtra("title", buttonInfo.title)
@@ -83,14 +93,10 @@ class MainActivity : AppCompatActivity() {
                         putExtra("website", buttonInfo.website)
                         putExtra("phone", buttonInfo.phone)
                     }
-
-                    // サブ画面を開始
                     editCommentLauncher.launch(intent)
                 }
             }
             buttonGrid.addView(button)
-
-            // コメントリスナーを設定
             setupCommentListener(buttonInfo.id, button)
         }
     }
@@ -104,13 +110,8 @@ class MainActivity : AppCompatActivity() {
                     comment?.let { comments.add(it) }
                 }
 
-                // ボタンのタイトルを buttonList から取得
                 val buttonInfo = buttonList.find { it.id == buttonId }
-                val buttonTitle = buttonInfo?.title ?: "ボタン$buttonId" // タイトルを取得
-
-                // 最新コメントとコメント件数をボタンに設定
-//                val latestComment = if (comments.isNotEmpty()) comments.last() else "コメントなし"
-//                button.text = "$buttonTitle: $latestComment (${comments.size}件)"
+                val buttonTitle = buttonInfo?.title ?: "ボタン$buttonId"
             }
 
             override fun onCancelled(error: DatabaseError) {

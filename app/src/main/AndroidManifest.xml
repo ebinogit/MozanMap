@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Firebaseの通信に必要 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -16,7 +15,6 @@
         android:theme="@style/Theme.MozanMap"
         tools:targetApi="31">
 
-        <!-- Firebaseのメタデータ -->
         <meta-data
             android:name="com.google.firebase.database.url"
             android:value="https://your-database-name.firebaseio.com" />
@@ -24,20 +22,26 @@
             android:name="com.google.firebase.analytics.collection.enabled"
             android:value="true" />
 
-        <!-- MainActivity -->
+        <!-- LoginActivity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
+            <!-- 最初に表示される画面をLoginActivityに設定 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- MainActivity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+
         <!-- SubActivity -->
         <activity
             android:name=".SubActivity"
             android:exported="true" />
-    </application>
 
+    </application>
 </manifest>
