@@ -20,15 +20,9 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ログイン" />
-
-    <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="新規登録" />
+        android:text="登録" />
 
 </LinearLayout>

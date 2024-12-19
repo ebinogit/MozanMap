@@ -33,6 +33,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
+
         <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
