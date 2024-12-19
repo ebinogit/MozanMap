@@ -7,17 +7,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class SubActivity : AppCompatActivity() {
 
     private lateinit var commentsRef: DatabaseReference
+    private lateinit var usersRef: DatabaseReference
     private lateinit var commentsRecyclerView: RecyclerView
     private lateinit var commentAdapter: CommentAdapter
     private val commentList = mutableListOf<String>()
     private val commentKeyMap = mutableMapOf<Int, String>() // コメントとキーの対応付け
 
-    private val isAdmin = true // 管理者判定（ここで管理者チェックを行う）
+    private var isAdmin = false // 管理者判定
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,17 +54,29 @@ class SubActivity : AppCompatActivity() {
 
         // RecyclerViewのセットアップ
         commentsRecyclerView = findViewById(R.id.commentsRecyclerView)
-        commentAdapter = CommentAdapter(commentList) { position ->
-            // 削除ボタンがクリックされたときの処理
-            val key = commentKeyMap[position]
-            if (key != null) {
-                commentsRef.child(key).removeValue() // Firebaseから削除
-                commentList.removeAt(position)      // ローカルリストから削除
-                commentKeyMap.remove(position)      // キーマッピングを削除
-                commentAdapter.notifyItemRemoved(position) // RecyclerViewを更新
-                Toast.makeText(this, "コメントを削除しました", Toast.LENGTH_SHORT).show()
+        commentAdapter = CommentAdapter(commentList, onDeleteClicked = { position ->
+            if (isAdmin) {
+                // インデックスが有効か確認
+                if (position >= 0 && position < commentList.size) {
+                    val key = commentKeyMap[position]
+                    if (key != null) {
+                        // Firebaseからコメント削除
+                        commentsRef.child(key).removeValue()
+                        // ローカルリストから削除
+                        commentList.removeAt(position)
+                        // キーマップから削除
+                        commentKeyMap.remove(position)
+                        // RecyclerViewを更新
+                        commentAdapter.notifyItemRemoved(position)
+                        Toast.makeText(this, "コメントを削除しました", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "無効なインデックスです", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "削除権限がありません", Toast.LENGTH_SHORT).show()
             }
-        }
+        })
         commentsRecyclerView.layoutManager = LinearLayoutManager(this)
         commentsRecyclerView.adapter = commentAdapter
         commentsRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
@@ -71,6 +85,12 @@ class SubActivity : AppCompatActivity() {
         commentsRef = FirebaseDatabase.getInstance("https://mozanmap-4e6a4-default-rtdb.europe-west1.firebasedatabase.app/")
             .getReference("comments")
             .child("button_$buttonId")
+
+        usersRef = FirebaseDatabase.getInstance("https://mozanmap-4e6a4-default-rtdb.europe-west1.firebasedatabase.app/")
+            .getReference("users")
+
+        // ユーザーが管理者かどうかを確認
+        checkAdminStatus()
 
         // コメントの読み込み
         loadComments()
@@ -90,6 +110,22 @@ class SubActivity : AppCompatActivity() {
         val buttonBack = findViewById<ImageButton>(R.id.button_back)
         buttonBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun checkAdminStatus() {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let { user ->
+            usersRef.child(user.uid).child("isAdmin").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    isAdmin = snapshot.getValue(Boolean::class.java) == true
+                    commentAdapter.setAdminStatus(isAdmin)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@SubActivity, "管理者権限の確認に失敗しました", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
 
