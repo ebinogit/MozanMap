@@ -1,10 +1,10 @@
 package com.example.mozanmap
 
+import CommentAdapter
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -25,15 +25,44 @@ class SubActivity : AppCompatActivity() {
 
         // インテントからデータを取得
         val buttonId = intent.getIntExtra("buttonId", -1)
+        val title = intent.getStringExtra("title")
+        val content = intent.getStringExtra("content")
+        val imageResId = intent.getIntExtra("imageResId", R.drawable.default_image)
+        val address = intent.getStringExtra("address")
+        val hours = intent.getStringExtra("hours")
+        val website = intent.getStringExtra("website")
+        val phone = intent.getStringExtra("phone")
 
         // 各Viewを取得
+        val titleTextView = findViewById<TextView>(R.id.titleTextView)
+        val contentTextView = findViewById<TextView>(R.id.contentTextView)
+        val hoursTextView = findViewById<TextView>(R.id.hoursTextView)
+        val websiteTextView = findViewById<TextView>(R.id.websiteTextView)
+        val phoneTextView = findViewById<TextView>(R.id.phoneTextView)
+        val imageView = findViewById<ImageView>(R.id.imageView)
         val commentEditText = findViewById<EditText>(R.id.commentEditText)
-        val saveButton = findViewById<Button>(R.id.button_save)
-        val buttonBack = findViewById<ImageButton>(R.id.button_back)
+
+        // 取得したデータを各Viewにセット
+        titleTextView.text = title ?: "タイトルがありません"
+        contentTextView.text = content ?: "内容がありません"
+        hoursTextView.text = hours ?: "営業時間がありません"
+        websiteTextView.text = website ?: "ウェブサイトがありません"
+        phoneTextView.text = phone ?: "電話番号がありません"
+        imageView.setImageResource(imageResId)
 
         // RecyclerViewのセットアップ
         commentsRecyclerView = findViewById(R.id.commentsRecyclerView)
-        commentAdapter = CommentAdapter(commentList)
+        commentAdapter = CommentAdapter(commentList) { position ->
+            // 削除ボタンがクリックされたときの処理
+            val key = commentKeyMap[position]
+            if (key != null) {
+                commentsRef.child(key).removeValue() // Firebaseから削除
+                commentList.removeAt(position)      // ローカルリストから削除
+                commentKeyMap.remove(position)      // キーマッピングを削除
+                commentAdapter.notifyItemRemoved(position) // RecyclerViewを更新
+                Toast.makeText(this, "コメントを削除しました", Toast.LENGTH_SHORT).show()
+            }
+        }
         commentsRecyclerView.layoutManager = LinearLayoutManager(this)
         commentsRecyclerView.adapter = commentAdapter
         commentsRecyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
@@ -47,6 +76,7 @@ class SubActivity : AppCompatActivity() {
         loadComments()
 
         // コメントの保存
+        val saveButton = findViewById<Button>(R.id.button_save)
         saveButton.setOnClickListener {
             val updatedComment = commentEditText.text.toString()
             if (updatedComment.isNotEmpty()) {
@@ -57,30 +87,9 @@ class SubActivity : AppCompatActivity() {
         }
 
         // 戻るボタン
+        val buttonBack = findViewById<ImageButton>(R.id.button_back)
         buttonBack.setOnClickListener {
             finish()
-        }
-
-        // RecyclerViewの項目スワイプ設定
-        if (isAdmin) { // 管理者のみ削除可能
-            val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
-                ): Boolean {
-                    return false
-                }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val position = viewHolder.adapterPosition
-                    val key = commentKeyMap[position]
-                    if (key != null) {
-                        commentsRef.child(key).removeValue() // Firebaseから削除
-                    }
-                }
-            })
-            itemTouchHelper.attachToRecyclerView(commentsRecyclerView)
         }
     }
 
