@@ -69,6 +69,11 @@ class SubActivity : AppCompatActivity() {
                         // RecyclerViewを更新
                         commentAdapter.notifyItemRemoved(position)
                         Toast.makeText(this, "コメントを削除しました", Toast.LENGTH_SHORT).show()
+
+                        // コメントがすべて削除された場合、前の画面に戻らないようにする
+                        if (commentList.isEmpty()) {
+                            Toast.makeText(this, "コメントがありません", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 } else {
                     Toast.makeText(this, "無効なインデックスです", Toast.LENGTH_SHORT).show()
