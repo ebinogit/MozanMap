@@ -15,7 +15,7 @@ object ButtonData {
             address = "東京都渋谷区1-1-1",
             hours = "9:00 - 18:00",
             website = "https://example.com/ebi",
-            phone = "03-1234-5678"
+            phone = "080-9876-6408"
         ),
         ButtonInfo(
             id = 1,
