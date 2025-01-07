@@ -1,5 +1,6 @@
 package com.example.mozanmap.data
 
+import android.util.Log
 import com.example.mozanmap.R
 
 /**
@@ -58,4 +59,6 @@ object ButtonData {
             phone = "03-9876-5432"
         )
     )
+
+
 }

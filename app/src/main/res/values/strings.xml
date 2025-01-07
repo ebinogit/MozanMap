@@ -3,4 +3,6 @@
     <string name="button_name1">class</string>
     <string name="button_name2">food</string>
     <string name="button_name3">others</string>
+    <string name="map_image_desc">地図の画像の説明</string>
+    <string name="class_button_desc">クラスボタンの説明</string>
 </resources>
