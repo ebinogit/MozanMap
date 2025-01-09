@@ -8,5 +8,7 @@ data class ButtonInfo(
     val address: String,
     val hours: String,
     val website: String,
-    val phone: String
+    val phone: String,
+    var comment: String = ""
+
 )
