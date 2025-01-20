@@ -110,7 +110,7 @@ class CustomImageView @JvmOverloads constructor(
         btn.scaleX = currentScale
         btn.scaleY = currentScale
     }
-//    private fun updateButtonPosition(btn:ImageButton,posX: Float, posY: Float) {
+    //    private fun updateButtonPosition(btn:ImageButton,posX: Float, posY: Float) {
 //        val currentScale = getScaleXFromMatrix()
 //        val x = 1200 - (1200 / (currentScale * 10)) + posX
 //        val y = 1249 - (1249 / (currentScale * 10)) + posY
