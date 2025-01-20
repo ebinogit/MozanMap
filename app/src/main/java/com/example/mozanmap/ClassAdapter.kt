@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mozanmap.data.ClassItem
 
-class ClassAdapter(private val classItems: List<MainActivity.ClassItem>) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
+class ClassAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
 
     private val expandedState = MutableList(classItems.size) { false }
 

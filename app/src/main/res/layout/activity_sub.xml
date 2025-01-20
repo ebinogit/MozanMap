@@ -1,6 +1,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
     <LinearLayout
@@ -8,6 +9,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
+
+
 
         <!-- 画像表示用ImageView -->
         <ImageButton
@@ -19,12 +22,21 @@
             android:contentDescription="戻る"
             android:src="@drawable/batu" />
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:contentDescription="画像の説明" />
+
+        </androidx.cardview.widget.CardView>
 
         <!-- タイトルTextView -->
         <TextView
@@ -66,6 +78,14 @@
                     android:layout_marginTop="8dp" />
             </LinearLayout>
 
+            <!-- 区切り線 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginVertical="8dp" />
+
+
             <!-- 営業時間 -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,6 +105,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp" />
             </LinearLayout>
+
+            <!-- 区切り線 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginVertical="8dp" />
+
 
             <!-- ウェブサイト -->
             <LinearLayout
@@ -107,6 +135,14 @@
                     android:layout_marginTop="8dp" />
             </LinearLayout>
 
+            <!-- 区切り線 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginVertical="8dp" />
+
+
             <!-- 電話番号 -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -127,6 +163,14 @@
                     android:autoLink="phone"
                     android:layout_marginTop="8dp" />
             </LinearLayout>
+
+            <!-- 区切り線 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginVertical="8dp" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/commentsRecyclerView"
