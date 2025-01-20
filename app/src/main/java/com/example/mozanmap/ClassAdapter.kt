@@ -1,13 +1,18 @@
 package com.example.mozanmap
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mozanmap.data.ClassItem
 
-class ClassAdapter(private val classItems: List<MainActivity.ClassItem>) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
+class ClassAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
 
     private val expandedState = MutableList(classItems.size) { false }
 
@@ -24,20 +29,78 @@ class ClassAdapter(private val classItems: List<MainActivity.ClassItem>) : Recyc
     override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
         val classItem = classItems[position]
 
-        // タイトルを設定
+        // タイトル設定
         holder.titleTextView.text = classItem.title
-        // 詳細の表示状態を設定
+
+        // 詳細アイテムのRecyclerViewを設定
         holder.detailsRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
-        holder.detailsRecyclerView.adapter = DetailsAdapter(classItem.details)
+        holder.detailsRecyclerView.adapter = DetailsAdapter(classItem.details) { detail ->
+            // 詳細アイテムのクリック処理//クリックされた詳細のtextをdetailに渡す
+            handleDetailClick(detail,holder.itemView)
+        }
         holder.detailsRecyclerView.setHasFixedSize(true)
+
+        // 詳細の表示/非表示設定
         holder.detailsRecyclerView.visibility = if (expandedState[position]) View.VISIBLE else View.GONE
 
-        // タイトルがクリックされたら表示状態を切り替える
+        // タイトルクリックで展開状態を切り替え
         holder.titleTextView.setOnClickListener {
-            expandedState[position] = !expandedState[position] // 状態を反転
-            notifyItemChanged(position) // アイテムを再描画
+            val now = !expandedState[position]
+            expandItemAt(position,now)
         }
     }
-
     override fun getItemCount(): Int = classItems.size
+
+    fun expandItemAt(position: Int, to: Boolean) {
+        val previousExpandedPosition = expandedState.indexOf(true) // 現在展開されているアイテムを取得
+        if (previousExpandedPosition != -1 && previousExpandedPosition != position) {
+            expandedState[previousExpandedPosition] = false
+            notifyItemChanged(previousExpandedPosition) // 前回の展開を閉じる
+        }
+        expandedState[position] = to
+        notifyItemChanged(position) // 現在の展開を更新
+        println("Clicked text: $position")
+    }
+    // 詳細アイテムのクリック処理
+//    private fun handleDetailClick(detail: String, view: View) {
+//        println("Clicked detail: $detail")
+//
+//        // 詳細情報に基づいて適切なデータを設定
+//        val textToDisplay = detail // detail そのまま使う場合
+//        val imageResId = when (detail) {
+//            "4F ドーナツラウンジ" -> R.drawable.ebiebi
+//            else -> R.drawable.kazoo
+//        }
+//
+//        // View の context を利用して Intent を作成
+//        val context = view.context
+//        val intent = Intent(context, ClassActivity::class.java).apply {
+//            putExtra("text", textToDisplay)
+//            putExtra("imageResId", imageResId)
+//        }
+//
+//        // ClassActivity を開始
+//        context.startActivity(intent)
+//    }
+    private fun handleDetailClick(detail: String, view: View) {
+        println("Clicked detail: $detail")
+
+        // 詳細情報に基づいて適切なデータを設定
+        val textToDisplay = detail // detail そのまま使う場合
+        val imageResId = when (detail) {
+            "4F ドーナツラウンジ" -> R.drawable.ebiebi
+            else -> R.drawable.kazoo
+        }
+
+        // View の context を利用して Intent を作成
+        val context = view.context
+        val intent = Intent(context, ClassActivity::class.java).apply {
+            putExtra("text", textToDisplay)
+            putExtra("imageResId", imageResId)
+        }
+
+        // ClassActivity を開始
+        context.startActivity(intent)
+    }
+
 }

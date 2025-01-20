@@ -108,6 +108,8 @@ class SubActivity : AppCompatActivity() {
                 commentsRef.push().setValue(updatedComment)
                 commentEditText.text.clear()
                 Toast.makeText(this, "コメントを保存しました", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "コメントを入力してください", Toast.LENGTH_SHORT).show()
             }
         }
 
