@@ -32,14 +32,12 @@
 <!--            </intent-filter>-->
         </activity>
 
+        <!-- RegisterActivity -->
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
 
         <!-- MainActivity -->
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            android:exported="true" />-->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -50,9 +48,15 @@
             </intent-filter>
         </activity>
 
-        <!-- SubActivity -->
+        <!-- ClassActivity -->
         <activity
-            android:name=".SubActivity"
+            android:name=".ClassActivity"
+            android:exported="true">
+        </activity>
+
+        <!-- FoodActivity -->
+        <activity
+            android:name=".FoodActivity"
             android:exported="true">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.SUB" />-->
@@ -60,11 +64,11 @@
 <!--            </intent-filter>-->
         </activity>
 
+        <!-- OtherActivity -->
         <activity
-            android:name=".ClassActivity"
+            android:name=".OtherActivity"
             android:exported="true">
         </activity>
-
     </application>
 
 </manifest>

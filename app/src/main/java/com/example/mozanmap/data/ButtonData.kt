@@ -3,6 +3,21 @@ package com.example.mozanmap.data
 import com.example.mozanmap.R
 
 /**
+ * ボタン情報を表すデータクラス
+ */
+data class ButtonInfo(
+    val id: Int,
+    val title: String,
+    val content: String,
+    val imageResId: Int,
+    val address: String,
+    val hours: String,
+    val website: String,
+    val phone: String,
+    var comment: String = ""
+)
+
+/**
  * ボタン情報のリストを保持するオブジェクト
  */
 object ButtonData {
@@ -56,7 +71,7 @@ object ButtonData {
             hours = "10:00 - 20:00",
             website = "https://www.yoshinoya.com/",
             phone = "03-9876-5432"
-        ) ,
+        ),
         ButtonInfo(
             id = 5,
             title = "パンだパンダ",
@@ -90,6 +105,16 @@ object ButtonData {
         ButtonInfo(
             id = 8,
             title = "インターネットカフェ",
+            content = "インターネットカフェの情報",
+            imageResId = R.drawable.ebiebi,
+            address = "東京都渋谷区1-1-1",
+            hours = "9:00 - 18:00",
+            website = "https://example.com/ebi",
+            phone = "03-1234-5678"
+        ),
+        ButtonInfo(
+            id = 9,
+            title = "追加",
             content = "インターネットカフェの情報",
             imageResId = R.drawable.ebiebi,
             address = "東京都渋谷区1-1-1",

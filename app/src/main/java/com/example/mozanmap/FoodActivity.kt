@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class SubActivity : AppCompatActivity() {
+class FoodActivity : AppCompatActivity() {
 
     private lateinit var commentsRef: DatabaseReference
     private lateinit var usersRef: DatabaseReference
@@ -23,7 +23,7 @@ class SubActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sub)
+        setContentView(R.layout.activity_food)
 
         // インテントからデータを取得
         val buttonId = intent.getIntExtra("buttonId", -1)
@@ -130,7 +130,7 @@ class SubActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@SubActivity, "管理者権限の確認に失敗しました", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@FoodActivity, "管理者権限の確認に失敗しました", Toast.LENGTH_SHORT).show()
                 }
             })
         }

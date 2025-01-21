@@ -20,7 +20,7 @@ class FoodAdapter(private val items: List<ButtonInfo>, private val onItemClick: 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         // food_img_button レイアウトをインフレート
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.food_item_btn, parent, false)
+            .inflate(R.layout.item_food_btn, parent, false)
         return FoodViewHolder(itemView)
     }
 

@@ -4,27 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.LayoutInflater
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.gridlayout.widget.GridLayout
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mozanmap.data.ButtonData
 import com.example.mozanmap.data.ClassData
-import com.example.mozanmap.data.getScreenSize
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private lateinit var pinBox: FrameLayout
+//    private var pinBoxButtonId=0
     private val classContainer: RecyclerView by lazy{
         findViewById<RecyclerView>(R.id.class_button_container).apply {
             adapter = ClassAdapter(ClassData.classItems)
@@ -32,10 +26,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private val foodContainer: View by lazy{
-        findViewById<View>(R.id.food_button_grid)
+        findViewById<RecyclerView>(R.id.food_button_container)
     }
     private val othersContainer: View by lazy{
-        findViewById<View>(R.id.others_button_container)
+        findViewById<RecyclerView>(R.id.others_button_container).apply {
+//            adapter = ClassAdapter(ClassData.classItems)
+//            setHasFixedSize(true)
+        }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,12 +82,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun setupRecyclerView() {
-        val recyclerView: RecyclerView = findViewById(R.id.food_button_grid)
+        val recyclerView: RecyclerView = findViewById(R.id.food_button_container)
 
         // Adapter を設定
         val foodAdapter = FoodAdapter(ButtonData.buttonList) { buttonInfo ->
             // ボタンがクリックされたときの動作
-            val intent = Intent(this@MainActivity, SubActivity::class.java).apply {
+            val intent = Intent(this@MainActivity, FoodActivity::class.java).apply {
+                putExtra("buttonId",buttonInfo.id)
                 putExtra("title", buttonInfo.title)
                 putExtra("content", buttonInfo.content)
                 putExtra("imageResId", buttonInfo.imageResId)
@@ -104,48 +102,6 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.adapter = foodAdapter
     }
-
-//    private fun addFoods() {
-//        // food_button_grid を取得
-//        val gridLayout: GridLayout = findViewById(R.id.food_button_grid)
-//
-//        // ButtonData のリストを取得
-//        val buttonList = ButtonData.buttonList
-//
-//        // 動的にボタンを追加
-//        for (buttonInfo in buttonList) {
-//            // カスタムレイアウトを膨らませる
-//            val itemView = LayoutInflater.from(this).inflate(R.layout.food_img_button, gridLayout, false)
-//
-//            // ImageButton と TextView を設定
-//            val imageButton: ImageButton = itemView.findViewById(R.id.image_button)
-//            val textView: TextView = itemView.findViewById(R.id.image_button_text)
-//
-//            // データを設定
-//            imageButton.setImageResource(buttonInfo.imageResId)
-//            textView.text = buttonInfo.title
-//
-//            // 必要ならボタンのクリックリスナーを設定
-//            imageButton.setOnClickListener {
-//                println("Clicked button: ${buttonInfo.title}")
-//
-//                // SubActivity に渡すための Intent を作成
-//                val intent = Intent(this@MainActivity, SubActivity::class.java).apply {
-//                    putExtra("title", buttonInfo.title)
-//                    putExtra("content", buttonInfo.content)
-//                    putExtra("imageResId", buttonInfo.imageResId)
-//                    putExtra("address", buttonInfo.address)
-//                    putExtra("hours", buttonInfo.hours)
-//                    putExtra("website", buttonInfo.website)
-//                    putExtra("phone", buttonInfo.phone)
-//                }
-//                startActivity(intent)
-//            }
-//
-//            // GridLayout に追加
-//            gridLayout.addView(itemView)
-//        }
-//    }
 
     private fun setupButtonSwitching() {
         val classButton = findViewById<ImageButton>(R.id.button_class)
