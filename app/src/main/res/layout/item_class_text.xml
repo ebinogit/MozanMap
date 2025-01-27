@@ -3,20 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <!--建物名ブロック-->
+    android:orientation="vertical"
+    >
     <TextView
         android:id="@+id/class_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:background="@drawable/class_text_bg"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginTop="5dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
         />
     <!-- 教室ブロック(item_detail.xml) -->
     <androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"/>
+        android:paddingStart="30dp"
+        android:paddingEnd="15dp"/>
 </LinearLayout>

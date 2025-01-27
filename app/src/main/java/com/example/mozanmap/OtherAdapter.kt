@@ -4,79 +4,45 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mozanmap.data.ClassItem
+import com.example.mozanmap.data.OtherItem
 
-class OtherAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapter<OtherAdapter.ClassViewHolder>() {
+class OtherAdapter(
+    private val otherItems: List<OtherItem>,
+    private val onItemClick: (OtherItem) -> Unit
+) : RecyclerView.Adapter<OtherAdapter.OtherViewHolder>() {
 
-    private val expandedState = MutableList(classItems.size) { false }
-
-    class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titleTextView: TextView = itemView.findViewById(R.id.class_title)
-        val detailsRecyclerView: RecyclerView = itemView.findViewById(R.id.details_recycler_view)
+    class OtherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val card:CardView=itemView.findViewById(R.id.other_item_card)
+        val imageButton: ImageButton = itemView.findViewById(R.id.other_item_img)
+        val textView: TextView = itemView.findViewById(R.id.other_item_text)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_class_text, parent, false)
-        return ClassViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OtherViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_other_btn, parent, false)
+        return OtherViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
-        val classItem = classItems[position]
+    override fun onBindViewHolder(holder: OtherViewHolder, position: Int) {
+        val item = otherItems[position]
 
-        // タイトル設定
-        holder.titleTextView.text = classItem.title
+        // 画像とテキストを設定
+        holder.imageButton.setImageResource(item.img)
+        holder.textView.text = item.title
 
-        // 詳細アイテムのRecyclerViewを設定
-        holder.detailsRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
-        holder.detailsRecyclerView.adapter = DetailsAdapter(classItem.details) { detail ->
-            // 詳細アイテムのクリック処理//クリックされた詳細のtextをdetailに渡す
-            handleDetailClick(detail,holder.itemView)
+        // クリックリスナーを設定
+        holder.card.setOnClickListener {
+            onItemClick(item)
         }
-        holder.detailsRecyclerView.setHasFixedSize(true)
-
-        // 詳細の表示/非表示設定
-        holder.detailsRecyclerView.visibility = if (expandedState[position]) View.VISIBLE else View.GONE
-
-        // タイトルクリックで展開状態を切り替え
-        holder.titleTextView.setOnClickListener {
-            val now = !expandedState[position]
-            expandItemAt(position,now)
+        holder.imageButton.setOnClickListener {
+            onItemClick(item)
         }
     }
-    override fun getItemCount(): Int = classItems.size
 
-    fun expandItemAt(position: Int, to: Boolean) {
-        val previousExpandedPosition = expandedState.indexOf(true) // 現在展開されているアイテムを取得
-        if (previousExpandedPosition != -1 && previousExpandedPosition != position) {
-            expandedState[previousExpandedPosition] = false
-            notifyItemChanged(previousExpandedPosition) // 前回の展開を閉じる
-        }
-        expandedState[position] = to
-        notifyItemChanged(position) // 現在の展開を更新
-        println("Clicked text: $position")
-    }
-    private fun handleDetailClick(detail: String, view: View) {
-        println("Clicked detail: $detail")
-
-        // 詳細情報に基づいて適切なデータを設定
-        val textToDisplay = detail // detail そのまま使う場合
-        val imageResId = when (detail) {
-            "4F ドーナツラウンジ" -> R.drawable.ebiebi
-            else -> R.drawable.kazoo
-        }
-
-        // View の context を利用して Intent を作成
-        val context = view.context
-        val intent = Intent(context, ClassActivity::class.java).apply {
-            putExtra("text", textToDisplay)
-            putExtra("imageResId", imageResId)
-        }
-
-        // ClassActivity を開始
-        context.startActivity(intent)
-    }
-
+    override fun getItemCount(): Int = otherItems.size
 }

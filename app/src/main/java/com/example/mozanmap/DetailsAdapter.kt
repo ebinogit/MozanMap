@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mozanmap.data.ClassItem2
 
 class DetailsAdapter(
-    private val details: List<String>, // 詳細データ
-    private val onDetailClick: (String) -> Unit // クリック時のコールバック
+    private val details: List<ClassItem2>, // 詳細データ
+    private val onDetailClick: (List<String>) -> Unit // クリック時のコールバック
 ) : RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder>() {
 
     class DetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,11 +23,11 @@ class DetailsAdapter(
 
     override fun onBindViewHolder(holder: DetailsViewHolder, position: Int) {
         val detail = details[position]
-        holder.detailButton.text = detail
+        holder.detailButton.text = detail.title
 
         // クリックリスナーの設定
         holder.detailButton.setOnClickListener {
-            onDetailClick(detail) // コールバックを呼び出す
+            onDetailClick(detail.details) // コールバックを呼び出す
         }
     }
 

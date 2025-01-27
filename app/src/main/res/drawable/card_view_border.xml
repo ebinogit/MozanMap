@@ -1,0 +1,15 @@
+<!-- res/drawable/border_textview.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 背景の白色部分 -->
+    <item>
+        <shape>
+            <solid android:color="#000000" />
+        </shape>
+    </item>
+    <!-- 下枠線 -->
+    <item android:bottom="3dp">
+        <shape>
+            <solid android:color="#C8C8FF" />
+        </shape>
+    </item>
+</layer-list>

@@ -7,18 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <TextView
-        android:id="@+id/text_view"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:contentDescription="@null"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textColor="#330d10"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal" />
-
 
     <FrameLayout
         android:id="@+id/pinBox"
@@ -30,6 +18,17 @@
             android:layout_height="wrap_content"
             android:src="@drawable/map2"
             />
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="#330d10"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal" />
     </FrameLayout>
 
 <!--ボトムシート-->
@@ -40,7 +39,7 @@
         android:orientation="vertical"
         app:layout_behavior="@string/bottom_sheet_behavior"
         app:behavior_peekHeight="130dp"
-        android:background="#A4696D"
+        android:background="#4AA624"
         android:paddingTop="5dp"
         >
 <!--横棒-->
@@ -140,10 +139,7 @@
             android:id="@+id/class_button_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="6dp"
-            android:paddingTop="3dp"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
+            android:layout_margin="7dp"
             android:background="@drawable/class_view_bg"
             app:layoutManager="LinearLayoutManager">
         </androidx.recyclerview.widget.RecyclerView>
@@ -152,21 +148,17 @@
             android:id="@+id/food_button_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="6dp"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
+            android:layout_margin="7dp"
             android:background="@drawable/food_view_bg"
-            app:layoutManager="GridLayoutManager"
-            app:spanCount="2">
+            app:layoutManager="LinearLayoutManager"
+            >
         </androidx.recyclerview.widget.RecyclerView>
         <!--        Otherエリア-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/others_button_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="6dp"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
+            android:layout_margin="7dp"
             android:background="@drawable/other_view_bg"
             app:layoutManager="LinearLayoutManager">
         </androidx.recyclerview.widget.RecyclerView>

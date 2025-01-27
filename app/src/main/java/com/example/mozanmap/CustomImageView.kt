@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import kotlin.math.pow
 import kotlin.math.sqrt
+import com.example.mozanmap.data.PimData
 
 class CustomImageView @JvmOverloads constructor(
     context: Context,
@@ -26,50 +27,11 @@ class CustomImageView @JvmOverloads constructor(
     private var isPinchMode = false // ピンチ操作中かどうかを記録
     private val buttons = arrayOfNulls<ImageButton>(34)
 
-    data class ButtonPosition(val x: Float, val y: Float)
-
-    private val buttonPositions = listOf(
-        ButtonPosition(-50f, -137f),
-        ButtonPosition(-327f, 47f),
-        ButtonPosition(33f, 83f),
-        ButtonPosition(390f, -250f),
-        ButtonPosition(67f, 150f),
-        ButtonPosition(350f, 160f),
-        ButtonPosition(183f, 517f),
-        ButtonPosition(863f, -117f),
-        ButtonPosition(433f, -7f),
-        ButtonPosition(1950f, 420f),
-        ButtonPosition(823f, 83f),
-        ButtonPosition(800f, 273f),
-        ButtonPosition(1635f, 273f),
-        ButtonPosition(1515f, 83f),
-        ButtonPosition(1085f, -30f),
-        ButtonPosition(1320f, -30f),
-        ButtonPosition(1075f, 185f),
-        ButtonPosition(1330f, 185f),
-        ButtonPosition(833f, -243f),
-        ButtonPosition(1160f, -195f),
-        ButtonPosition(2030f, -210f),
-        ButtonPosition(2285f, -325f),
-        ButtonPosition(1990f, 185f),
-        ButtonPosition(2285f, 380f),
-        ButtonPosition(1920f, 1440f),
-        ButtonPosition(930f, 520f),
-        ButtonPosition(1490f, 530f),
-        ButtonPosition(1820f, 730f),
-        ButtonPosition(920f, 730f),
-        ButtonPosition(1395f, 1295f),
-        ButtonPosition(1540f, 1700f),
-        ButtonPosition(1705f, 1810f),
-        ButtonPosition(740f, 1140f),
-        ButtonPosition(1790f, 1035f),
-    )
-
     //ボタンをセット
     fun setButton(id: Int, button: ImageButton) {
         buttons[id] = button
-        val pos = buttonPositions[id]
-        updateButtonPosition(button, pos.x, pos.y)
+        val pos = PimData.pinItem[id]
+        updateButtonPosition(button, pos.posX, pos.posY)
     }
 
     //画像をセット
@@ -96,7 +58,6 @@ class CustomImageView @JvmOverloads constructor(
     }
     private fun updateButtonPosition(btn:ImageButton,posX: Float, posY: Float) {
         val scale = resources.displayMetrics.density
-        Log.d("scale","$scale")
         val currentScale = getScaleXFromMatrix()
 //        val x = 1380 - (1380 / (currentScale * 10)) + posX*scale
 //        val y = 1400 - (1400 / (currentScale * 10)) + posY*scale
@@ -110,18 +71,6 @@ class CustomImageView @JvmOverloads constructor(
         btn.scaleX = currentScale
         btn.scaleY = currentScale
     }
-    //    private fun updateButtonPosition(btn:ImageButton,posX: Float, posY: Float) {
-//        val currentScale = getScaleXFromMatrix()
-//        val x = 1200 - (1200 / (currentScale * 10)) + posX
-//        val y = 1249 - (1249 / (currentScale * 10)) + posY
-//        val points = floatArrayOf(x, y)
-//        matrix.mapPoints(points)
-//        // ボタンの位置を設定
-//        btn.x = points[0]
-//        btn.y = points[1]
-//        btn.scaleX = currentScale
-//        btn.scaleY = currentScale
-//    }
     private fun updateMapPos(posX:Float,posY: Float){
         matrix.postTranslate(posX, posY)
         imageMatrix = matrix
@@ -147,8 +96,8 @@ class CustomImageView @JvmOverloads constructor(
                 updateMapPos(dx,dy)
                 buttons.forEachIndexed { index, button ->
                     button?.let {
-                        val position = buttonPositions[index]
-                        updateButtonPosition(it, position.x, position.y)
+                        val position = PimData.pinItem[index]
+                        updateButtonPosition(it, position.posX, position.posY)
                     }
                 }
             }
@@ -179,8 +128,8 @@ class CustomImageView @JvmOverloads constructor(
                         updateMapScale(scaleFactor,focusX,focusY)
                         buttons.forEachIndexed { index, button ->
                             button?.let {
-                                val position = buttonPositions[index]
-                                updateButtonPosition(it, position.x, position.y)
+                                val position = PimData.pinItem[index]
+                                updateButtonPosition(it, position.posX, position.posY)
                             }
                         }
                     }

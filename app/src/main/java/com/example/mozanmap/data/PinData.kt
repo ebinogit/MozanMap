@@ -1,0 +1,47 @@
+package com.example.mozanmap.data
+
+data class PinItem(
+    val id:Int,
+    val title: String,
+    val posX: Float,
+    val posY: Float
+)
+
+object PimData {
+    val pinItem = listOf(
+        PinItem(0,"体育館", -50f,-137f),
+        PinItem(1,"テニスコート",-327f,47f),
+        PinItem(2,"プール",33f,83f),
+        PinItem(3,"弓道場",390f,-250f),
+        PinItem(4,"スタジオ棟",67f,150f),
+        PinItem(5,"サークル棟",350f,160f),
+        PinItem(6,"総合グラウンド",183f,517f),
+        PinItem(7,"セントラルプラザ",863f,-117f),
+        PinItem(8,"実験棟A",433f,-7f),
+        PinItem(9,"実験棟B",1950f,420f),
+        PinItem(10,"講義実験棟",823f,83f),
+        PinItem(11,"講義棟A",800f,273f),
+        PinItem(12,"講義棟B",1635f,273f),
+        PinItem(13,"講義棟C",1515f,83f),
+        PinItem(14,"講義棟D",1085f,-30f),
+        PinItem(15,"講義棟E",1320f,-30f),
+        PinItem(16,"研究棟A",1075f,185f),
+        PinItem(17,"研究棟B",1330f,185f),
+        PinItem(18,"研究棟C",833f,-243f),
+        PinItem(19,"片柳記念ホール",1160f,-195f),
+        PinItem(20,"ものづくり工房",2030f,-210f),
+        PinItem(21,"土木・造園実習場",2285f,-325f),
+        PinItem(22,"メディアホール/自動車整備実習場",1990f,185f),
+        PinItem(23,"守衛棟(西門)",2285f,2285f),
+        PinItem(24,"守衛棟(正門)",1920f,1440f),
+        PinItem(25,"厚生棟",930f,520f),
+        PinItem(26,"図書館棟",1490f,530f),
+        PinItem(27,"展示棟",1820f,730f),
+        PinItem(28,"FOODS FUU",920f,730f),
+        PinItem(29,"片柳研究棟",1395f,1295f),
+        PinItem(30,"多目的グラウンド",1540f,1700f),
+        PinItem(31,"クラブハウス",1705f,1810f),
+        PinItem(32,"スマートハウス実習棟",740f,1140f),
+        PinItem(33,"本部棟",1790f,1035f),
+    )
+}

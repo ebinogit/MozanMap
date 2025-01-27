@@ -25,6 +25,7 @@ class ClassAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
         val classItem = classItems[position]
+//        val classItem2 = classItem.details[position]
 
         // タイトル設定
         holder.titleTextView.text = classItem.title
@@ -33,7 +34,7 @@ class ClassAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapt
         holder.detailsRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
         holder.detailsRecyclerView.adapter = DetailsAdapter(classItem.details) { detail ->
             // 詳細アイテムのクリック処理//クリックされた詳細のtextをdetailに渡す
-            handleDetailClick(detail,holder.itemView)
+//            handleDetailClick(detail,holder.itemView)
         }
         holder.detailsRecyclerView.setHasFixedSize(true)
 
@@ -58,25 +59,24 @@ class ClassAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapt
         notifyItemChanged(position) // 現在の展開を更新
         println("Clicked text: $position")
     }
-    private fun handleDetailClick(detail: String, view: View) {
-        println("Clicked detail: $detail")
-
-        // 詳細情報に基づいて適切なデータを設定
-        val textToDisplay = detail // detail そのまま使う場合
-        val imageResId = when (detail) {
-            "4F ドーナツラウンジ" -> R.drawable.ebiebi
-            else -> R.drawable.kazoo
-        }
-
-        // View の context を利用して Intent を作成
-        val context = view.context
-        val intent = Intent(context, ClassActivity::class.java).apply {
-            putExtra("text", textToDisplay)
-            putExtra("imageResId", imageResId)
-        }
-
-        // ClassActivity を開始
-        context.startActivity(intent)
-    }
+//    private fun handleDetailClick(detail: List<String>, view: View) {
+//        println("Clicked detail: $detail")
+//        // 詳細情報に基づいて適切なデータを設定
+//        val textToDisplay = detail // detail そのまま使う場合
+//        val imageResId = when (detail) {
+//            "4F ドーナツラウンジ" -> R.drawable.ebiebi
+//            else -> R.drawable.kazoo
+//        }
+//
+//        // View の context を利用して Intent を作成
+//        val context = view.context
+//        val intent = Intent(context, ClassActivity::class.java).apply {
+//            putExtra("text", textToDisplay)
+//            putExtra("imageResId", imageResId)
+//        }
+//
+//        // ClassActivity を開始
+//        context.startActivity(intent)
+//    }
 
 }

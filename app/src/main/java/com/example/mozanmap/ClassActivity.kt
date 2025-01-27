@@ -16,7 +16,6 @@ class ClassActivity : AppCompatActivity() {
         val imageResId = intent.getIntExtra("imageResId", R.drawable.default_image)
 
         // レイアウトのビューに設定
-        findViewById<TextView>(R.id.textView).text = text
-        findViewById<ImageView>(R.id.imageView).setImageResource(imageResId)
+        findViewById<ImageView>(R.id.class_view_img).setImageResource(imageResId)
     }
 }

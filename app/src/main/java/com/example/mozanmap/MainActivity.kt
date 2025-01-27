@@ -10,8 +10,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mozanmap.data.ButtonData
 import com.example.mozanmap.data.ClassData
+import com.example.mozanmap.data.FoodData
+import com.example.mozanmap.data.OtherData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainActivity : AppCompatActivity() {
@@ -26,12 +27,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private val foodContainer: View by lazy{
-        findViewById<RecyclerView>(R.id.food_button_container)
+        findViewById<RecyclerView>(R.id.food_button_container).apply {
+            adapter = FoodAdapter(FoodData.foodList)
+            setHasFixedSize(true)
+        }
     }
     private val othersContainer: View by lazy{
         findViewById<RecyclerView>(R.id.others_button_container).apply {
-//            adapter = ClassAdapter(ClassData.classItems)
-//            setHasFixedSize(true)
+            adapter = OtherAdapter(OtherData.otherItems){
+                //otherのクリック処理
+                Log.d("Main","click other")
+            }
+            setHasFixedSize(true)
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val bottomSheetLayout = findViewById<LinearLayout>(R.id.bottom_sheet)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        setupRecyclerView()
+//        setupRecyclerView()
         addPin()
         setupButtonSwitching()
     }
@@ -81,28 +88,6 @@ class MainActivity : AppCompatActivity() {
             i++
         }
     }
-    private fun setupRecyclerView() {
-        val recyclerView: RecyclerView = findViewById(R.id.food_button_container)
-
-        // Adapter を設定
-        val foodAdapter = FoodAdapter(ButtonData.buttonList) { buttonInfo ->
-            // ボタンがクリックされたときの動作
-            val intent = Intent(this@MainActivity, FoodActivity::class.java).apply {
-                putExtra("buttonId",buttonInfo.id)
-                putExtra("title", buttonInfo.title)
-                putExtra("content", buttonInfo.content)
-                putExtra("imageResId", buttonInfo.imageResId)
-                putExtra("address", buttonInfo.address)
-                putExtra("hours", buttonInfo.hours)
-                putExtra("website", buttonInfo.website)
-                putExtra("phone", buttonInfo.phone)
-            }
-            startActivity(intent)
-        }
-
-        recyclerView.adapter = foodAdapter
-    }
-
     private fun setupButtonSwitching() {
         val classButton = findViewById<ImageButton>(R.id.button_class)
         val foodButton = findViewById<ImageButton>(R.id.button_food)
