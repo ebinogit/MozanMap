@@ -1,404 +1,235 @@
 package com.example.mozanmap.data
 
-data class ClassItem(val title: String, val details: List<ClassItem2>)
-data class ClassItem2(val title: String, val details: List<String>)
+import com.example.mozanmap.R
 
-object ClassData { val classItems =
-        listOf(
-            ClassItem(
-                "研究棟A",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("101")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("ドーナツラウンジ")
-                    ),
-                )
-            ),
-            ClassItem(
-                "研究棟B",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("101")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("ドーナツラウンジ")
-                    ),
-                )
-            ),
-            ClassItem(
-                "研究棟C",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("101")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "片柳研究棟",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf(
-                            "ロボットラボラトリー",
-                            "AI実践センター",
-                            "デジタルラボラトリー",
-                            "バイオナノテクセンター",
-                            "デジタルツインセンター"
-                        )
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "講義棟A",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf(
-                            "インテリアデザイン室",
-                            "ゲーム研究・開発ルーム",
-                            "キャラクターデザインスタジオ",
-                            "デッサン室"
-                        )
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "講義棟B",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("101")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "講義棟C",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("101")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "講義棟D",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("101")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "講義棟E",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("101")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "講義棟F",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("101")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "実験棟A",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("101")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("201", "202")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("301", "302", "303")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "実験棟B(コンピュータ＆テクノロジーセンター)",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf(
-                            "高電圧実習室",
-                            "一級自動車設備実習場",
-                            "無響室",
-                            "音響計測実習室",
-                            "ロボット制作実習室",
-                            "電気機器実習室",
-                            "工作・計測・シャシ整備実習室"
-                        )
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("DTMルーム", "CAD実習室")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf(
-                            "ゲーム制作スタジオ",
-                            "CG制作スタジオ",
-                            "MANGA Digital Studio",
-                            "HACC Digital Studio"
-                        )
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("電子工学実習室(エレクトロニクス実験室)")
-                    ),
-                )
-            ),
-            ClassItem(
-                "スタジオ棟(KCfDA)",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf(
-                            "デジタル・オープン・スタジオ",
-                            "テレビスタジオ",
-                            "レコーディングスタジオ",
-                            "モーションキャプチャースタジオ"
-                        )
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("編集ライン", "テレビスタジオ副調整室(サブコントロールルーム)")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("MAスタジオ", "BOXステージ", "レッスンルーム")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "片柳記念ホール",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf(
-                            "アンサンブルスタジオA",
-                            "アンサンブルスタジオB",
-                            "キーボードルーム",
-                            "セッションルーム",
-                            "トレーニングルーム"
-                        )
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "メディアホール",
-                listOf(
-                    ClassItem2(
-                        "B1F",
-                        listOf("自動車整備実習棟", "ホール")
-                    ),
-                    ClassItem2(
-                        "1F",
-                        listOf("")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("")
-                    ),
-                )
-            ),
-            ClassItem(
-                "展示棟(AB Studio)",
-                listOf(
-                    ClassItem2(
-                        "1F",
-                        listOf("Aスタジオ", "Bスタジオ")
-                    ),
-                    ClassItem2(
-                        "2F",
-                        listOf("")
-                    ),
-                    ClassItem2(
-                        "3F",
-                        listOf("")
-                    ),
-                    ClassItem2(
-                        "4F",
-                        listOf("")
-                    ),
-                )
-            ),
-        )
+data class ClassItem(val title: String, val details: List<ClassItem2>)
+data class ClassItem2(val title: String,val imgID:Int, val details: List<ClassItem3>)
+data class ClassItem3(val title: String,val imgID:Int)
+
+object ClassData {
+    val classItems = listOf(
+        ClassItem("研究棟A", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                    ClassItem3("101",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                    ClassItem3("201",R.drawable.ebiebi),
+                    ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                    ClassItem3("301",R.drawable.ebiebi),
+                    ClassItem3("302",R.drawable.ebiebi),
+                    ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                    ClassItem3("ドーナツラウンジ",R.drawable.ebiebi))))),
+        ClassItem("研究棟B", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("101",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("ドーナツラウンジ",R.drawable.ebiebi))))),
+        ClassItem("研究棟C", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("101",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("片柳研究棟", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("ロボットラボラトリー",R.drawable.ebiebi),
+                ClassItem3("AI実践センター",R.drawable.ebiebi),
+                ClassItem3("デジタルラボラトリー",R.drawable.ebiebi),
+                ClassItem3("バイオナノテクセンター",R.drawable.ebiebi),
+                ClassItem3("デジタルツインセンター",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("講義棟A", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("インテリアデザイン室",R.drawable.ebiebi),
+                ClassItem3("ゲーム研究・開発ルーム",R.drawable.ebiebi),
+                ClassItem3("キャラクターデザインスタジオ",R.drawable.ebiebi),
+                ClassItem3("デッサン室",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("講義棟B", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("101",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("講義棟C", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("101",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("講義棟D", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("101",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("講義棟E", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("101",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("講義棟F", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("101",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("実験棟A", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("101",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("201",R.drawable.ebiebi),
+                ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("実験棟B(コンピュータ＆テクノロジーセンター)", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("高電圧実習室",R.drawable.ebiebi),
+                ClassItem3("一級自動車設備実習場",R.drawable.ebiebi),
+                ClassItem3("無響室",R.drawable.ebiebi),
+                ClassItem3("音響計測実習室",R.drawable.ebiebi),
+                ClassItem3("ロボット制作実習室",R.drawable.ebiebi),
+                ClassItem3("電気機器実習室",R.drawable.ebiebi),
+                ClassItem3("工作・計測・シャシ整備実習室",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("DTMルーム",R.drawable.ebiebi),
+                ClassItem3("CAD実習室",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("ゲーム制作スタジオ",R.drawable.ebiebi),
+                ClassItem3("CG制作スタジオ",R.drawable.ebiebi),
+                ClassItem3("MANGA Digital Studio",R.drawable.ebiebi),
+                ClassItem3("HACC Digital Studio",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("電子工学実習室(エレクトロニクス実験室)",R.drawable.ebiebi))))),
+        ClassItem("スタジオ棟(KCfDA)", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("デジタル・オープン・スタジオ",R.drawable.ebiebi),
+                ClassItem3("テレビスタジオ",R.drawable.ebiebi),
+                ClassItem3("レコーディングスタジオ",R.drawable.ebiebi),
+                ClassItem3("モーションキャプチャースタジオ",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("編集ライン",R.drawable.ebiebi),
+                ClassItem3("テレビスタジオ副調整室(サブコントロールルーム)",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("MAスタジオ",R.drawable.ebiebi),
+                ClassItem3("BOXステージ",R.drawable.ebiebi),
+                ClassItem3("レッスンルーム",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("スタジオ棟(KCfDA)", listOf(
+            ClassItem2("1F", R.drawable.ebiebi, listOf(
+                ClassItem3("アンサンブルスタジオA",R.drawable.ebiebi),
+                ClassItem3("アンサンブルスタジオB",R.drawable.ebiebi),
+                ClassItem3("キーボードルーム",R.drawable.ebiebi),
+                ClassItem3("セッションルーム",R.drawable.ebiebi),
+                ClassItem3("トレーニングルーム",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("メディアホール", listOf(
+            ClassItem2("B1F", R.drawable.ebiebi, listOf(
+                ClassItem3("自動車整備実習棟",R.drawable.ebiebi),
+                ClassItem3("ホール",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi))))),
+        ClassItem("展示棟(AB Studio)", listOf(
+            ClassItem2("B1F", R.drawable.ebiebi, listOf(
+                ClassItem3("Aスタジオ",R.drawable.ebiebi),
+                ClassItem3("Bスタジオ",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi))),
+            ClassItem2("3F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi),
+                ClassItem3("",R.drawable.ebiebi))),
+            ClassItem2("4F", R.drawable.ebiebi, listOf(
+                ClassItem3("",R.drawable.ebiebi)
+            ))
+        ))
+    )
 }
-//package com.example.mozanmap.data
-//
-//data class ClassItem(val title: String, val details: List<String>)
-//
-//object ClassData {
-//    val classItems = listOf(
-//        ClassItem("研究棟A", listOf("1F","2F","3F","4F","5F","6F","7F","8F","9F","10F","11F","12F")),
-//        ClassItem("研究棟B", listOf("1F","2F","3F","4F","5F","6F","7F","8F","9F","10F","11F","12F")),
-//        ClassItem("研究棟C", listOf("")),
-//        ClassItem("片柳研究棟", listOf("ロボットラボラトリー","AI実践センター","デジタルラボラトリー","バイオナノテクセンター","デジタルツインセンター")),
-//        ClassItem("講義棟A", listOf("インテリアデザイン室","ゲーム研究・開発ルーム","キャラクターデザインスタジオ","デッサン室")),
-//        ClassItem("講義棟B", listOf("")),
-//        ClassItem("講義棟C", listOf("")),
-//        ClassItem("講義棟D", listOf("")),
-//        ClassItem("講義棟E", listOf("")),
-//        ClassItem("講義棟F", listOf("")),
-//        ClassItem("実験棟A", listOf("")),
-//        ClassItem("実験棟B(コンピュータ＆テクノロジーセンター)", listOf("1F 高電圧実習室","1F 一級自動車設備実習場","1F 無響室","1F 音響計測実習室","1F ロボット制作実習室","1F 電気機器実習室","1F 工作・計測・シャシ整備実習室","2F DTMルーム","2F CAD実習室","3F ゲーム制作スタジオ","3F CG制作スタジオ","3F MANGA Digital Studio","3F HACC Digital Studio","4F 電子工学実習室(エレクトロニクス実験室)")),
-//        ClassItem("スタジオ棟(KCfDA)", listOf("1F デジタル・オープン・スタジオ","1F テレビスタジオ","1F レコーディングスタジオ","1F モーションキャプチャースタジオ","2F 編集ライン","2F テレビスタジオ副調整室(サブコントロールルーム)","3F MAスタジオ","3F BOXステージ","3F レッスンルーム")),
-//        ClassItem("片柳記念ホール", listOf("アンサンブルスタジオA","アンサンブルスタジオB","キーボードルーム","セッションルーム","トレーニングルーム")),
-//        ClassItem("メディアホール", listOf("B1F 自動車整備実習棟","ホール")),
-//        ClassItem("展示棟(AB Studio)", listOf("Aスタジオ","Bスタジオ")),
-//    )
-//}

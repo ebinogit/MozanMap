@@ -5,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mozanmap.data.ClassItem
 import com.example.mozanmap.data.ClassItem2
 
-class DetailsAdapter(
-    private val details: List<ClassItem2>, // 詳細データ
-    private val onDetailClick: (List<String>) -> Unit // クリック時のコールバック
-) : RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder>() {
+class ClassSubAdapter(
+    private val details: ClassItem, // 詳細データ
+    private val onDetailClick: (String,String) -> Unit // クリック時のコールバック
+) : RecyclerView.Adapter<ClassSubAdapter.DetailsViewHolder>() {
 
     class DetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val detailButton: Button = itemView.findViewById(R.id.detail_text)
@@ -22,14 +23,14 @@ class DetailsAdapter(
     }
 
     override fun onBindViewHolder(holder: DetailsViewHolder, position: Int) {
-        val detail = details[position]
+        val detail = details.details[position]
         holder.detailButton.text = detail.title
 
         // クリックリスナーの設定
         holder.detailButton.setOnClickListener {
-            onDetailClick(detail.details) // コールバックを呼び出す
+            onDetailClick(details.title,detail.title) // コールバックを呼び出す
         }
     }
 
-    override fun getItemCount(): Int = details.size
+    override fun getItemCount(): Int = details.title.length
 }
