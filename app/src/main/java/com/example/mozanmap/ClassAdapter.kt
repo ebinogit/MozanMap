@@ -32,7 +32,7 @@ class ClassAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapt
 
         // 詳細アイテムのRecyclerViewを設定
         holder.detailsRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
-        holder.detailsRecyclerView.adapter = ClassSubAdapter(classItem) { detail,detail2 ->
+        holder.detailsRecyclerView.adapter = ClassItemAdapter(classItem) { detail, detail2 ->
             // 詳細アイテムのクリック処理//クリックされた詳細のtextをdetailに渡す
             handleDetailClick(detail,detail2,holder.itemView)
         }

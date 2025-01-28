@@ -1,14 +1,10 @@
 package com.example.mozanmap
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
-import android.widget.ImageButton
 import android.widget.TextView
-import androidx.gridlayout.widget.GridLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mozanmap.data.FoodInfo
 import com.example.mozanmap.data.FoodItem
@@ -37,7 +33,7 @@ class FoodAdapter(private val items: List<FoodItem>) :
         )
 
         // アダプターを設定
-        holder.gridView.adapter = FoodSubAdapter(item.details) { detail ->
+        holder.gridView.adapter = FoodItemAdapter(item.details) { detail ->
             foodSubClick(detail, holder.itemView)
         }
     }

@@ -4,16 +4,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mozanmap.data.FoodInfo
 
-class FoodSubAdapter(
+class FoodItemAdapter(
     private val foods: List<FoodInfo>, // 詳細データ
     private val onFoodClick: (FoodInfo) -> Unit // クリック時のコールバック
-) : RecyclerView.Adapter<FoodSubAdapter.FoodViewHolder>() {
+) : RecyclerView.Adapter<FoodItemAdapter.FoodViewHolder>() {
 
     class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageButton: ImageButton = itemView.findViewById(R.id.food_item_img)

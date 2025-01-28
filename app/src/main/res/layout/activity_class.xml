@@ -10,7 +10,7 @@
     android:padding="16dp"
     tools:ignore="UseCompoundDrawables">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/class_view_menu"
+        android:id="@+id/class_sub_menu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="7dp"
@@ -31,7 +31,7 @@
     </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/class_view_contents"
+        android:id="@+id/class_sub_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="7dp"

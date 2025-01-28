@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mozanmap.data.ClassItem
-import com.example.mozanmap.data.ClassItem2
 
-class ClassSubAdapter(
+class ClassItemAdapter(
     private val details: ClassItem, // 詳細データ
     private val onDetailClick: (String,String) -> Unit // クリック時のコールバック
-) : RecyclerView.Adapter<ClassSubAdapter.DetailsViewHolder>() {
+) : RecyclerView.Adapter<ClassItemAdapter.DetailsViewHolder>() {
 
     class DetailsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val detailButton: Button = itemView.findViewById(R.id.detail_text)
