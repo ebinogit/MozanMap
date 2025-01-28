@@ -7,35 +7,44 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp"
     tools:ignore="UseCompoundDrawables">
+    <TextView
+        android:id="@+id/class_view_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/class_sub_btn_bg"
+        android:radius="8dp"
+        android:text="@string/none_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/class2"
+        >
+    </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/class_sub_menu"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="7dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="@drawable/class_view_bg"
         app:layoutManager="LinearLayoutManager"
         android:orientation="horizontal" />
-
     <ImageView
         android:id="@+id/class_view_img"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginBottom="16dp"
         android:importantForAccessibility="no" />
-    <TextView
-        android:id="@+id/class_view_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/class_sub_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="7dp"
+        android:layout_margin="10dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="10dp"
         android:background="@drawable/class_view_bg"
-        app:layoutManager="LinearLayoutManager">
+        app:layoutManager="GridLayoutManager"
+        app:spanCount="2"
+        >
     </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

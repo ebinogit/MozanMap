@@ -11,15 +11,23 @@ object ClassData {
         ClassItem("研究棟A", listOf(
             ClassItem2("1F", R.drawable.ebiebi, listOf(
                     ClassItem3("101",R.drawable.ebiebi))),
-            ClassItem2("2F", R.drawable.ebiebi, listOf(
-                    ClassItem3("201",R.drawable.ebiebi),
-                    ClassItem3("202",R.drawable.ebiebi))),
+            ClassItem2("2F", R.drawable.kazoo, listOf(
+                    ClassItem3("201",R.drawable.kazoo),
+                    ClassItem3("202",R.drawable.food_img))),
             ClassItem2("3F", R.drawable.ebiebi, listOf(
                     ClassItem3("301",R.drawable.ebiebi),
                     ClassItem3("302",R.drawable.ebiebi),
                     ClassItem3("303",R.drawable.ebiebi))),
             ClassItem2("4F", R.drawable.ebiebi, listOf(
-                    ClassItem3("ドーナツラウンジ",R.drawable.ebiebi))))),
+                    ClassItem3("ドーナツラウンジ",R.drawable.ebiebi))),
+            ClassItem2("5F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("6F", R.drawable.ebiebi, listOf(
+                ClassItem3("301",R.drawable.ebiebi),
+                ClassItem3("302",R.drawable.ebiebi),
+                ClassItem3("303",R.drawable.ebiebi))))),
         ClassItem("研究棟B", listOf(
             ClassItem2("1F", R.drawable.ebiebi, listOf(
                 ClassItem3("101",R.drawable.ebiebi))),

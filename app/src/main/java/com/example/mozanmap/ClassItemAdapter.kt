@@ -31,5 +31,7 @@ class ClassItemAdapter(
         }
     }
 
-    override fun getItemCount(): Int = details.title.length
+    override fun getItemCount(): Int {
+        return details.details.size // リストのサイズを返す
+    }
 }

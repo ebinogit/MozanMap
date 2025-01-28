@@ -32,9 +32,9 @@ class ClassAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapt
 
         // 詳細アイテムのRecyclerViewを設定
         holder.detailsRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
-        holder.detailsRecyclerView.adapter = ClassItemAdapter(classItem) { detail, detail2 ->
+        holder.detailsRecyclerView.adapter = ClassItemAdapter(classItem) { building, floor ->
             // 詳細アイテムのクリック処理//クリックされた詳細のtextをdetailに渡す
-            handleDetailClick(detail,detail2,holder.itemView)
+            handleDetailClick(building,floor,holder.itemView)
         }
         holder.detailsRecyclerView.setHasFixedSize(true)
 
@@ -59,13 +59,13 @@ class ClassAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapt
         notifyItemChanged(position) // 現在の展開を更新
         println("Clicked text: $position")
     }
-    private fun handleDetailClick(detail: String,detail2: String, view: View) {
-        println("Clicked detail: $detail2")
+    private fun handleDetailClick(building: String,floor: String, view: View) {
+        println("Clicked detail: $floor")
         // View の context を利用して Intent を作成
         val context = view.context
         val intent = Intent(context, ClassActivity::class.java).apply {
-            putExtra("building", detail)
-            putExtra("floor", detail2)
+            putExtra("building", building)
+            putExtra("floor", floor)
         }
 
         // ClassActivity を開始
