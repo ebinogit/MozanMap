@@ -9,15 +9,12 @@ data class ClassItem3(val title: String,val imgID:Int)
 object ClassData {
     val classItems = listOf(
         ClassItem("研究棟A", listOf(
-            ClassItem2("1F", R.drawable.ebiebi, listOf(
-                    ClassItem3("101",R.drawable.ebiebi))),
-            ClassItem2("2F", R.drawable.kazoo, listOf(
-                    ClassItem3("201",R.drawable.kazoo),
-                    ClassItem3("202",R.drawable.food_img))),
-            ClassItem2("3F", R.drawable.ebiebi, listOf(
-                    ClassItem3("301",R.drawable.ebiebi),
-                    ClassItem3("302",R.drawable.ebiebi),
-                    ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("1F", R.drawable.ken_1f, listOf()),
+            ClassItem2("2F", R.drawable.ken_2f, listOf()),
+            ClassItem2("3F", R.drawable.ken_3f, listOf(
+                    ClassItem3("301",R.drawable.kena_503),
+                    ClassItem3("302",R.drawable.kena_503),
+                    ClassItem3("303",R.drawable.kena_503))),
             ClassItem2("4F", R.drawable.ebiebi, listOf(
                     ClassItem3("ドーナツラウンジ",R.drawable.ebiebi))),
             ClassItem2("5F", R.drawable.ebiebi, listOf(
@@ -29,15 +26,13 @@ object ClassData {
                 ClassItem3("302",R.drawable.ebiebi),
                 ClassItem3("303",R.drawable.ebiebi))))),
         ClassItem("研究棟B", listOf(
-            ClassItem2("1F", R.drawable.ebiebi, listOf(
-                ClassItem3("101",R.drawable.ebiebi))),
-            ClassItem2("2F", R.drawable.ebiebi, listOf(
-                ClassItem3("201",R.drawable.ebiebi),
-                ClassItem3("202",R.drawable.ebiebi))),
-            ClassItem2("3F", R.drawable.ebiebi, listOf(
-                ClassItem3("301",R.drawable.ebiebi),
-                ClassItem3("302",R.drawable.ebiebi),
-                ClassItem3("303",R.drawable.ebiebi))),
+            ClassItem2("1F", R.drawable.ken_1f, listOf()),
+            ClassItem2("2F", R.drawable.ken_2f, listOf()),
+            ClassItem2("3F", R.drawable.ken_2f, listOf(
+                ClassItem3("301",R.drawable.kenb_402),
+                ClassItem3("302",R.drawable.kenb_402),
+                ClassItem3("303",R.drawable.kenb_402),
+                ClassItem3("304",R.drawable.kenb_402))),
             ClassItem2("4F", R.drawable.ebiebi, listOf(
                 ClassItem3("ドーナツラウンジ",R.drawable.ebiebi))))),
         ClassItem("研究棟C", listOf(
