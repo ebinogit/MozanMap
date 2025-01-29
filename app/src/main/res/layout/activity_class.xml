@@ -1,50 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:ignore="UseCompoundDrawables">
-    <TextView
-        android:id="@+id/class_view_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/class_sub_btn_bg"
-        android:radius="8dp"
-        android:text="@string/none_text"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/class2"
-        >
-    </TextView>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/class_sub_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/class_view_bg"
-        app:layoutManager="LinearLayoutManager"
-        android:orientation="horizontal" />
-    <ImageView
-        android:id="@+id/class_view_img"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="16dp"
-        android:importantForAccessibility="no" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/class_sub_item"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="10dp"
-        android:background="@drawable/class_view_bg"
-        app:layoutManager="GridLayoutManager"
-        app:spanCount="2"
-        >
-    </androidx.recyclerview.widget.RecyclerView>
-</LinearLayout>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp"
+        tools:ignore="UseCompoundDrawables">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="10dp"
+            >
+            <ImageView
+                android:id="@+id/class_sub_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="fitXY"/>
+            <ImageButton
+                android:id="@+id/button_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/batu"
+                android:importantForAccessibility="no"
+                android:background="@drawable/img_btn_bg1"
+                android:layout_margin="5dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                tools:ignore="UseCompoundDrawables">
+            <TextView
+                android:id="@+id/class_view_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/text_bg1"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/class_sub_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal" />
+                <ImageView
+                    android:id="@+id/class_view_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:importantForAccessibility="no"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/class_sub_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="0dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/class_view_bg"
+            app:layoutManager="GridLayoutManager"
+            app:spanCount="2"
+            >
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

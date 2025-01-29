@@ -17,7 +17,7 @@ import com.google.android.material.button.MaterialButton
 class ClassSubMenuAdapter(
     private val building: ClassItem,
     private var nowFloor:ClassItem2,
-    private val onClick:(String)->Unit
+    private val onClick:(String,Int)->Unit
 ): RecyclerView.Adapter<ClassSubMenuAdapter.ViewHolder>() {
 
     class ViewHolder(floorView:View):RecyclerView.ViewHolder(floorView){
@@ -41,7 +41,7 @@ class ClassSubMenuAdapter(
             val clickFloor=building.details.find { it.title==holder.btn.text }
             nowFloor=clickFloor!!
             notifyDataSetChanged()
-            onClick(floor.title)
+            onClick(floor.title,position)
         }
     }
     private fun changeButton(btn:MaterialButton){

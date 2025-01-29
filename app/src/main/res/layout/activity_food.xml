@@ -12,13 +12,11 @@
         <!-- 戻るボタン -->
         <ImageButton
             android:id="@+id/button_back"
-            android:layout_width="43dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="戻るボタン"
-            android:src="@drawable/batu" />
-
+            android:scaleType="centerInside"
+            android:src="@drawable/batu"
+            android:importantForAccessibility="no"/>
         <!-- メイン画像 -->
         <ImageView
             android:id="@+id/imageView"

@@ -1,5 +1,5 @@
 <!-- res/drawable/border.xml -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#C8FFC8"/>
+    <solid android:color="#FFC8FF"/>
     <corners android:radius="10dp"/> <!-- 角の丸み (オプション) -->
 </shape>

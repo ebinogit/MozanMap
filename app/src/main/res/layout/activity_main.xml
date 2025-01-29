@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#72ae80"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -39,7 +40,7 @@
         android:orientation="vertical"
         app:layout_behavior="@string/bottom_sheet_behavior"
         app:behavior_peekHeight="130dp"
-        android:background="#4AA624"
+        android:background="#9BFF00"
         android:paddingTop="5dp"
         >
 <!--横棒-->

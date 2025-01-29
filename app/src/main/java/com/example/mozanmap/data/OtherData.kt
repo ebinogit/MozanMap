@@ -10,8 +10,8 @@ data class OtherItem(
 
 object OtherData {
     val otherItems = listOf(
-        OtherItem(0,"プール", R.drawable.kazoo),
-        OtherItem(1,"体育館", R.drawable.kazoo),
-        OtherItem(2,"図書館", R.drawable.kazoo),
+        OtherItem(0,"プール", R.drawable.pul),
+        OtherItem(1,"体育館", R.drawable.arena),
+        OtherItem(2,"図書館", R.drawable.library),
     )
 }

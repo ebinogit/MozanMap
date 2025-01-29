@@ -1,6 +1,5 @@
 package com.example.mozanmap
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,11 +8,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mozanmap.data.ClassData
 import com.example.mozanmap.data.FoodData
 import com.example.mozanmap.data.OtherData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -75,12 +76,14 @@ class MainActivity : AppCompatActivity() {
             button.setOnClickListener {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 Log.d("MainActivity", "$currentId, clicked") // currentId を使用
-
-                if (currentId == 16 || currentId == 17) {
+                if (currentId in 0..14) {
 //                    val classContainer = findViewById<View>(R.id.class_button_container)
                     setupButtonClickListener(R.drawable.class_on, R.drawable.food_img, R.drawable.others_img, classContainer)
-                    val classAdapter = findViewById<RecyclerView>(R.id.class_button_container).adapter as? ClassAdapter
-                    classAdapter?.expandItemAt(currentId-16, true) // インスタンス経由で呼び出す
+                    val recyclerView = findViewById<RecyclerView>(R.id.class_button_container)
+                    val classAdapter = recyclerView.adapter as? ClassAdapter
+                    classAdapter?.expandItemAt(currentId, true) // インスタンス経由で呼び出す
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager?
+                    layoutManager!!.scrollToPositionWithOffset(currentId, 0)
                 } else {
                     setupButtonClickListener(R.drawable.class_img, R.drawable.food_img, R.drawable.others_on, othersContainer)
                 }
