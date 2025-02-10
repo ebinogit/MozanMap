@@ -16,8 +16,8 @@ import com.google.android.material.button.MaterialButton
 
 class ClassSubMenuAdapter(
     private val building: ClassItem,
-    private var nowFloor:ClassItem2,
-    private val onClick:(String,Int)->Unit
+    private var nowFloor: ClassItem2,
+    private val onClick:(String)->Unit
 ): RecyclerView.Adapter<ClassSubMenuAdapter.ViewHolder>() {
 
     class ViewHolder(floorView:View):RecyclerView.ViewHolder(floorView){
@@ -25,8 +25,7 @@ class ClassSubMenuAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView=
-            LayoutInflater.from(parent.context).inflate(R.layout.item_class_sub_floor, parent, false)
+        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.item_class_sub_floor, parent, false)
         return ViewHolder(itemView)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -41,17 +40,15 @@ class ClassSubMenuAdapter(
             val clickFloor=building.details.find { it.title==holder.btn.text }
             nowFloor=clickFloor!!
             notifyDataSetChanged()
-            onClick(floor.title,position)
+            onClick(floor.title)
         }
     }
     private fun changeButton(btn:MaterialButton){
         btn.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFc8c8"))
-        btn.setStrokeColorResource(R.color.black)
         btn.setTextColor(Color.parseColor("#000000"))
     }
     private fun changeButton2(btn: MaterialButton) {
         btn.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF3232")) // 背景色
-        btn.setStrokeColorResource(R.color.white) // 枠線色
         btn.setTextColor(Color.parseColor("#ffffff")) // テキスト色
     }
     override fun getItemCount(): Int =building.details.size

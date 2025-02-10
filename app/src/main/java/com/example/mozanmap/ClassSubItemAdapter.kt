@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mozanmap.data.ClassItem3
 
 class ClassSubItemAdapter(
@@ -18,17 +19,19 @@ class ClassSubItemAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassSubViewHolder {
-        val itemView=
-            LayoutInflater.from(parent.context).inflate(R.layout.item_class_sub_item, parent, false)
+        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.item_class_sub_item, parent, false)
         return ClassSubViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ClassSubViewHolder, position: Int) {
         val item = classes[position]
-        holder.img.setImageResource(item.imgID)
+        Glide.with(holder.img.context)
+            .load(item.imgID)
+//            .override(100, 100) // 必要ならリサイズ
+            .into(holder.img)
         holder.text.text = item.title
         holder.img.setOnClickListener {
-//            onItemClick(item.details[position])
+            println("click class:${item.title}")
         }
     }
     fun updateData(newDetails: List<ClassItem3>) {

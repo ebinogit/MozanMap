@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:importantForAccessibility="no"
-                android:scaleType="fitXY"/>
+                android:scaleType="center"/>
             <ImageButton
                 android:id="@+id/button_back"
                 android:layout_width="50dp"

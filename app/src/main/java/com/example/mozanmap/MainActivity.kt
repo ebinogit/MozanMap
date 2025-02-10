@@ -8,8 +8,8 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mozanmap.data.ClassData
 import com.example.mozanmap.data.FoodData
 import com.example.mozanmap.data.OtherData
@@ -74,19 +74,19 @@ class MainActivity : AppCompatActivity() {
             customImageView.setButton(button.id, button)
 
             button.setOnClickListener {
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                Log.d("MainActivity", "$currentId, clicked") // currentId を使用
-                if (currentId in 0..14) {
-//                    val classContainer = findViewById<View>(R.id.class_button_container)
-                    setupButtonClickListener(R.drawable.class_on, R.drawable.food_img, R.drawable.others_img, classContainer)
-                    val recyclerView = findViewById<RecyclerView>(R.id.class_button_container)
-                    val classAdapter = recyclerView.adapter as? ClassAdapter
-                    classAdapter?.expandItemAt(currentId, true) // インスタンス経由で呼び出す
-                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager?
-                    layoutManager!!.scrollToPositionWithOffset(currentId, 0)
-                } else {
-                    setupButtonClickListener(R.drawable.class_img, R.drawable.food_img, R.drawable.others_on, othersContainer)
-                }
+//                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+//                Log.d("MainActivity", "$currentId, clicked") // currentId を使用
+//                if (currentId in 0..14) {
+////                    val classContainer = findViewById<View>(R.id.class_button_container)
+//                    setupButtonClickListener(R.drawable.class_on, R.drawable.food_img, R.drawable.others_img, classContainer)
+//                    val recyclerView = findViewById<RecyclerView>(R.id.class_button_container)
+//                    val classAdapter = recyclerView.adapter as? ClassAdapter
+//                    classAdapter?.expandItemAt(currentId, true) // インスタンス経由で呼び出す
+//                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager?
+//                    layoutManager!!.scrollToPositionWithOffset(currentId, 0)
+//                } else {
+//                    setupButtonClickListener(R.drawable.class_img, R.drawable.food_img, R.drawable.others_on, othersContainer)
+//                }
             }
             i++
         }
@@ -105,14 +105,25 @@ class MainActivity : AppCompatActivity() {
         othersButton.setOnClickListener {
             setupButtonClickListener(R.drawable.class_img, R.drawable.food_img, R.drawable.others_on, othersContainer)
         }
-    }private fun setupButtonClickListener(classImgResId: Int, foodImgResId: Int, othersImgResId: Int, viewToShow: View) {
-        findViewById<ImageButton>(R.id.button_class).setImageResource(classImgResId)
-        findViewById<ImageButton>(R.id.button_food).setImageResource(foodImgResId)
-        findViewById<ImageButton>(R.id.button_others).setImageResource(othersImgResId)
+    }
+    private fun setupButtonClickListener(classImgResId: Int, foodImgResId: Int, othersImgResId: Int, viewToShow: View) {
+        val classButton = findViewById<ImageButton>(R.id.button_class)
+        val foodButton = findViewById<ImageButton>(R.id.button_food)
+        val othersButton = findViewById<ImageButton>(R.id.button_others)
+        Glide.with(this)
+            .load(classImgResId)
+            .into(classButton)
+        Glide.with(this)
+            .load(foodImgResId)
+            .into(foodButton)
+        Glide.with(this)
+            .load(othersImgResId)
+            .into(othersButton)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         hideAllViews()
         viewToShow.visibility = View.VISIBLE
-    }private fun hideAllViews() {
+    }
+    private fun hideAllViews() {
         classContainer.visibility = View.GONE
         foodContainer.visibility = View.GONE
         othersContainer.visibility = View.GONE

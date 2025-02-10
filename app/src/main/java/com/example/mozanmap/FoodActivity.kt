@@ -7,18 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mozanmap.data.ClassData
+import com.example.mozanmap.data.FoodData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class FoodActivity : AppCompatActivity() {
-
     private lateinit var commentsRef: DatabaseReference
     private lateinit var usersRef: DatabaseReference
     private lateinit var commentsRecyclerView: RecyclerView
     private lateinit var commentAdapter: CommentAdapter
     private val commentList = mutableListOf<String>()
     private val commentKeyMap = mutableMapOf<Int, String>() // コメントとキーの対応付け
-
     private var isAdmin = false // 管理者判定
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,14 +26,9 @@ class FoodActivity : AppCompatActivity() {
         setContentView(R.layout.activity_food)
 
         // インテントからデータを取得
-        val buttonId = intent.getIntExtra("buttonId", -1)
-        val title = intent.getStringExtra("title")
-        val content = intent.getStringExtra("content")
-        val imageResId = intent.getIntExtra("imageResId", R.drawable.default_image)
-        val address = intent.getStringExtra("address")
-        val hours = intent.getStringExtra("hours")
-        val website = intent.getStringExtra("website")
-        val phone = intent.getStringExtra("phone")
+        val build = intent.getStringExtra("build")
+        val buttonId = intent.getIntExtra("Id",-1)
+        val selectedItem = FoodData.foodList.find { it.title == build }?.details?.find { it.id == buttonId }
 
         // 各Viewを取得
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
@@ -41,16 +36,16 @@ class FoodActivity : AppCompatActivity() {
         val hoursTextView = findViewById<TextView>(R.id.hoursTextView)
         val websiteTextView = findViewById<TextView>(R.id.websiteTextView)
         val phoneTextView = findViewById<TextView>(R.id.phoneTextView)
-        val imageView = findViewById<ImageView>(R.id.imageView)
+        val imageView = findViewById<ImageView>(R.id.foodSubImg)
         val commentEditText = findViewById<EditText>(R.id.commentEditText)
 
         // 取得したデータを各Viewにセット
-        titleTextView.text = title ?: "タイトルがありません"
-        contentTextView.text = content ?: "内容がありません"
-        hoursTextView.text = hours ?: "営業時間がありません"
-        websiteTextView.text = website ?: "ウェブサイトがありません"
-        phoneTextView.text = phone ?: "電話番号がありません"
-        imageView.setImageResource(imageResId)
+        titleTextView.text = selectedItem?.title
+//        contentTextView.text = content ?: "内容がありません"
+//        hoursTextView.text = hours ?: "営業時間がありません"
+//        websiteTextView.text = website ?: "ウェブサイトがありません"
+//        phoneTextView.text = phone ?: "電話番号がありません"
+//        imageView.setImageResource(imageResId)
 
         // RecyclerViewのセットアップ
         commentsRecyclerView = findViewById(R.id.commentsRecyclerView)

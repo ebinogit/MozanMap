@@ -8,7 +8,7 @@ data class ClassItem3(val title: String,val imgID:Int)
 
 object ClassData {
     val classItems = listOf(
-        ClassItem("研究棟A",R.drawable.resesarch_building, listOf(
+        ClassItem("研究棟A",R.drawable.kena, listOf(
             ClassItem2("1F", R.drawable.ken_1f, listOf()),
             ClassItem2("2F", R.drawable.ken_2f, listOf()),
             ClassItem2("3F", R.drawable.ken_3f, listOf(
@@ -129,7 +129,7 @@ object ClassData {
                 ClassItem3("1211",R.drawable.ken),
                 ClassItem3("1212",R.drawable.ken),
                 ClassItem3("1213",R.drawable.ken))))),
-        ClassItem("研究棟B",R.drawable.default_image, listOf(
+        ClassItem("研究棟B",R.drawable.kenb, listOf(
             ClassItem2("1F", R.drawable.ken_1f, listOf()),
             ClassItem2("2F", R.drawable.ken_2f, listOf()),
             ClassItem2("3F", R.drawable.ken_3f, listOf(
@@ -164,19 +164,20 @@ object ClassData {
                 ClassItem3("1111",R.drawable.ken),
                 ClassItem3("1112",R.drawable.ken))),
             ClassItem2("12F", R.drawable.kenb_12f, listOf(
-                ClassItem3("1201",R.drawable.ken),
-                ClassItem3("1202",R.drawable.ken),
-                ClassItem3("1203",R.drawable.ken),
-                ClassItem3("1204",R.drawable.ken),
-                ClassItem3("1205",R.drawable.ken),
-                ClassItem3("1206",R.drawable.ken),
-                ClassItem3("1207",R.drawable.ken),
-                ClassItem3("1208",R.drawable.ken),
-                ClassItem3("1209",R.drawable.ken),
-                ClassItem3("1211",R.drawable.ken),
-                ClassItem3("1212",R.drawable.ken),
-                ClassItem3("1213",R.drawable.ken))))),
-        ClassItem("研究棟C",R.drawable.default_image, listOf()),
+                ClassItem3("1201",R.drawable.kenb_1201),
+                ClassItem3("1202",R.drawable.kenb_1202),
+                ClassItem3("1203",R.drawable.kenb_1203),
+                ClassItem3("1204",R.drawable.kenb_1204),
+                ClassItem3("1205",R.drawable.kenb_1205),
+                ClassItem3("1206",R.drawable.kenb_1206),
+                ClassItem3("1207",R.drawable.kenb_1207),
+                ClassItem3("1208",R.drawable.kenb_1208),
+                ClassItem3("1209",R.drawable.kenb_1209),
+                ClassItem3("1211",R.drawable.kenb_1210),
+                ClassItem3("1212",R.drawable.kenb_1211),
+                ClassItem3("1213",R.drawable.kenb_1212))))),
+        ClassItem("研究棟C",R.drawable.default_image, listOf(
+            ClassItem2("1F", R.drawable.default_image, listOf()))),
         ClassItem("片柳研究棟",R.drawable.default_image, listOf(
             ClassItem2("?F", R.drawable.default_image, listOf(
                 ClassItem3("ロボットラボラトリー",R.drawable.default_image),
@@ -190,7 +191,7 @@ object ClassData {
                 ClassItem3("ゲーム研究・開発ルーム",R.drawable.default_image),
                 ClassItem3("キャラクターデザインスタジオ",R.drawable.default_image),
                 ClassItem3("デッサン室",R.drawable.default_image))))),
-        ClassItem("講義棟B",R.drawable.bcdef2, listOf(
+        ClassItem("講義棟B",R.drawable.kou, listOf(
             ClassItem2("1F", R.drawable.koub_1f, listOf()),
             ClassItem2("2F", R.drawable.koub_2f, listOf(
                 ClassItem3("201",R.drawable.ken),
@@ -202,7 +203,7 @@ object ClassData {
                 ClassItem3("207",R.drawable.ken),
                 ClassItem3("208",R.drawable.ken),
                 ClassItem3("209",R.drawable.ken))))),
-        ClassItem("講義棟C",R.drawable.bcdef2, listOf(
+        ClassItem("講義棟C",R.drawable.kou, listOf(
             ClassItem2("1F", R.drawable.kouc_1f, listOf(
                 ClassItem3("101",R.drawable.ken),
                 ClassItem3("102",R.drawable.ken))),

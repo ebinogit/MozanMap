@@ -2,79 +2,68 @@ package com.example.mozanmap
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mozanmap.data.ClassData
-import com.google.android.material.button.MaterialButton
 
 class ClassActivity : AppCompatActivity() {
 
     private lateinit var menuContainer: RecyclerView
     private lateinit var itemContainer: RecyclerView
     private lateinit var textBuilding: TextView
-    private lateinit var imgFloor: ImageView
     private lateinit var imgBuilding: ImageView
-    private var selectedMenuIndex: Int? = null // Id を null 許容型にする
+    private lateinit var imgFloor: ImageView
+    private lateinit var buttonBack: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_class)
 
-        // RecyclerView の初期化
-        itemContainer = findViewById(R.id.class_sub_item)
         menuContainer = findViewById(R.id.class_sub_menu)
+        itemContainer = findViewById(R.id.class_sub_item)
         textBuilding = findViewById(R.id.class_view_text)
-        imgFloor = findViewById(R.id.class_view_img)
         imgBuilding = findViewById(R.id.class_sub_img)
+        imgFloor = findViewById(R.id.class_view_img)
+        buttonBack = findViewById(R.id.button_back)
 
         // Intent からデータを取得
-        val building = intent.getStringExtra("building") ?: "No building provided"
-        val floor = intent.getStringExtra("floor") ?: "No floor provided"
-
-        // 条件に一致するデータを取得
+        val building = intent.getStringExtra("title") ?: "No building provided"
+        // 一致する施設を取得
         val selectedBuilding = ClassData.classItems.find { it.title == building }
-        val selectedFloor = selectedBuilding?.details?.find { it.title == floor }
+        //一階を取得
+        val firstFloor = selectedBuilding!!.details[0]
 
-        if (selectedBuilding == null || selectedFloor == null) {
-            Log.e("ClassActivity", "Building or Floor data not found")
-            finish()
-            return
+        // RecyclerView の初期設定
+        val itemAdapter = ClassSubItemAdapter(firstFloor.details)
+        itemContainer.apply {
+            setHasFixedSize(true)
+            adapter = itemAdapter
         }
-
-        // RecyclerView のアダプターを設定
-        val itemAdapter = ClassSubItemAdapter(selectedFloor.details)
-        itemContainer.adapter = itemAdapter
-
-        menuContainer.adapter = ClassSubMenuAdapter(selectedBuilding, selectedFloor) { menu, id ->
-            Log.d("test", "click ClassSubMenu:$menu")
+        val menuAdapter = ClassSubMenuAdapter(selectedBuilding, firstFloor) { menu->
+            Log.d("ClassActivity", "Selected menu: $menu")
             val newFloor = selectedBuilding.details.find { it.title == menu }
-            if (newFloor != null) {
-                imgFloor.setImageResource(newFloor.imgID)
-                itemAdapter.updateData(newFloor.details)
-                selectedMenuIndex = id
-            }
+            Glide.with(this)
+                .load(newFloor?.imgID)
+                .into(imgFloor)
+            itemAdapter.updateData(newFloor!!.details)
         }
-
-        // 初期スクロール位置の設定
-        selectedMenuIndex = selectedBuilding.details.indexOf(selectedFloor)
-        selectedMenuIndex?.let { index ->
-            menuContainer.post {
-                (menuContainer.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(index-1, 0)
-            }
+        menuContainer.apply {
+            setHasFixedSize(true)
+            adapter = menuAdapter
         }
-
         // レイアウトのビューに設定
         textBuilding.text = selectedBuilding.title
-        imgFloor.setImageResource(selectedFloor.imgID)
-        imgBuilding.setImageResource(selectedBuilding.imgID)
-
-        // 戻るボタンの処理
-        val buttonBack = findViewById<ImageButton>(R.id.button_back)
+        Glide.with(this)
+            .load(selectedBuilding.imgID)
+            .into(imgBuilding)
+        Glide.with(this)
+            .load(firstFloor.imgID)
+            .into(imgFloor)
+        // 戻るボタン
         buttonBack.setOnClickListener {
             finish()
         }

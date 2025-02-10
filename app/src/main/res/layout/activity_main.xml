@@ -40,7 +40,7 @@
         android:orientation="vertical"
         app:layout_behavior="@string/bottom_sheet_behavior"
         app:behavior_peekHeight="130dp"
-        android:background="#9BFF00"
+        android:background="#B4FF00"
         android:paddingTop="5dp"
         >
 <!--横棒-->

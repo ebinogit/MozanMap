@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mozanmap.data.ClassItem
 import com.example.mozanmap.data.OtherItem
 
@@ -32,7 +33,9 @@ class OtherAdapter(
         val item = otherItems[position]
 
         // 画像とテキストを設定
-        holder.imageButton.setImageResource(item.img)
+        Glide.with(holder.imageButton.context)
+            .load(item.img)
+            .into(holder.imageButton)
         holder.textView.text = item.title
 
         // クリックリスナーを設定

@@ -17,6 +17,6 @@ class OtherActivity : AppCompatActivity() {
 
         // レイアウトのビューに設定
         findViewById<TextView>(R.id.textView).text = text
-        findViewById<ImageView>(R.id.imageView).setImageResource(imageResId)
+//        findViewById<ImageView>(R.id.imageView).setImageResource(imageResId)
     }
 }

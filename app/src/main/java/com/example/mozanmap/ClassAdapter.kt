@@ -4,72 +4,50 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mozanmap.data.ClassItem
 
-class ClassAdapter(private val classItems: List<ClassItem>) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
-
-    private val expandedState = MutableList(classItems.size) { false }
+class ClassAdapter(
+    private val classItems: List<ClassItem>
+) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
 
     class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titleTextView: TextView = itemView.findViewById(R.id.class_title)
-        val detailsRecyclerView: RecyclerView = itemView.findViewById(R.id.details_recycler_view)
+        val image: ImageButton = itemView.findViewById(R.id.class_item_img)
+        val text: TextView = itemView.findViewById(R.id.class_item_text)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_class_text, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_class_btn, parent, false)
         return ClassViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
         val classItem = classItems[position]
-//        val classItem2 = classItem.details[position]
-
-        // タイトル設定
-        holder.titleTextView.text = classItem.title
-
-        // 詳細アイテムのRecyclerViewを設定
-        holder.detailsRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
-        holder.detailsRecyclerView.adapter = ClassItemAdapter(classItem) { building, floor ->
-            // 詳細アイテムのクリック処理//クリックされた詳細のtextをdetailに渡す
-            handleDetailClick(building,floor,holder.itemView)
+        // 設定
+        holder.text.text = classItem.title
+        Glide.with(holder.image.context)
+            .load(classItem.imgID)
+            .into(holder.image)
+        //クリックリスナー
+        holder.text.setOnClickListener {
+            clickClass(classItem, holder.itemView)
         }
-        holder.detailsRecyclerView.setHasFixedSize(true)
-
-        // 詳細の表示/非表示設定
-        holder.detailsRecyclerView.visibility = if (expandedState[position]) View.VISIBLE else View.GONE
-
-        // タイトルクリックで展開状態を切り替え
-        holder.titleTextView.setOnClickListener {
-            val now = !expandedState[position]
-            expandItemAt(position,now)
+        holder.image.setOnClickListener {
+            clickClass(classItem, holder.itemView)
         }
     }
     override fun getItemCount(): Int = classItems.size
-
-    fun expandItemAt(position: Int, to: Boolean) {
-        val previousExpandedPosition = expandedState.indexOf(true) // 現在展開されているアイテムを取得
-        if (previousExpandedPosition != -1 && previousExpandedPosition != position) {
-            expandedState[previousExpandedPosition] = false
-            notifyItemChanged(previousExpandedPosition) // 前回の展開を閉じる
-        }
-        expandedState[position] = to
-        notifyItemChanged(position) // 現在の展開を更新
-        println("Clicked text: $position")
+}
+private fun clickClass(detail: ClassItem, view: View){
+    println("click class:${detail.title}")
+    val context = view.context
+    val intent = Intent(context, ClassActivity::class.java).apply {
+        putExtra("title", detail.title)
+        putExtra("imageResId",detail.imgID)
     }
-    private fun handleDetailClick(building: String,floor: String, view: View) {
-        println("Clicked detail: $floor")
-        // View の context を利用して Intent を作成
-        val context = view.context
-        val intent = Intent(context, ClassActivity::class.java).apply {
-            putExtra("building", building)
-            putExtra("floor", floor)
-        }
-
-        // ClassActivity を開始
-        context.startActivity(intent)
-    }
-
+    context.startActivity(intent)
 }
