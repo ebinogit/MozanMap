@@ -35,10 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
     private val othersContainer: View by lazy{
         findViewById<RecyclerView>(R.id.others_button_container).apply {
-            adapter = OtherAdapter(OtherData.otherItems){
-                //otherのクリック処理
-                Log.d("Main","click other")
-            }
+            adapter = OtherAdapter(OtherData.otherItems)
             setHasFixedSize(true)
         }
     }
@@ -62,7 +59,9 @@ class MainActivity : AppCompatActivity() {
             val button = ImageButton(this).also {
                 it.id = currentId // 保存した currentId を使用
                 it.setBackgroundResource(R.drawable.circle_button)
-                it.setImageResource(R.drawable.pin)
+                Glide.with(this)
+                    .load(R.drawable.pin)
+                    .into(it)
                 val sizeInDp = 80
                 val scale = resources.displayMetrics.density
                 val sizeInPx = (sizeInDp * scale).toInt() // dp を px に変換

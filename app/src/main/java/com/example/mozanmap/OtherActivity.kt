@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.example.mozanmap.data.OtherData
 
 class OtherActivity : AppCompatActivity() {
 
@@ -12,11 +14,11 @@ class OtherActivity : AppCompatActivity() {
         setContentView(R.layout.activity_other)
 
         // Intent からデータを取得
-        val text = intent.getStringExtra("text") ?: "No text provided"
-        val imageResId = intent.getIntExtra("imageResId", R.drawable.default_image)
+        val id = intent.getIntExtra("id",-1)
+        val item = OtherData.otherItems.find { it.id == id }
 
         // レイアウトのビューに設定
-        findViewById<TextView>(R.id.textView).text = text
-//        findViewById<ImageView>(R.id.imageView).setImageResource(imageResId)
+        findViewById<TextView>(R.id.textView).text = item?.title
+        Glide.with(this).load(item?.img).into(findViewById(R.id.otherSubImg))
     }
 }

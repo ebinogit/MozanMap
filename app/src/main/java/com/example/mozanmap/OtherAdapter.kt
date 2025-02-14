@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,8 +15,7 @@ import com.example.mozanmap.data.ClassItem
 import com.example.mozanmap.data.OtherItem
 
 class OtherAdapter(
-    private val otherItems: List<OtherItem>,
-    private val onItemClick: (OtherItem) -> Unit
+    private val otherItems: List<OtherItem>
 ) : RecyclerView.Adapter<OtherAdapter.OtherViewHolder>() {
 
     class OtherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,11 +40,17 @@ class OtherAdapter(
 
         // クリックリスナーを設定
         holder.card.setOnClickListener {
-            onItemClick(item)
+            click(item.id,holder.itemView)
         }
         holder.imageButton.setOnClickListener {
-            onItemClick(item)
+            click(item.id,holder.itemView)
         }
+    }
+    private fun click(id:Int, view: View) {
+        val context = view.context
+        val intent = Intent(context, OtherActivity::class.java)
+        intent.putExtra("id", id)
+        context.startActivity(intent)
     }
 
     override fun getItemCount(): Int = otherItems.size

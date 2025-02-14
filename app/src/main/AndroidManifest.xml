@@ -31,12 +31,10 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
-
         <!-- RegisterActivity -->
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
-
         <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
@@ -47,23 +45,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!-- ClassActivity -->
         <activity
             android:name=".ClassActivity"
             android:exported="true">
         </activity>
-
         <!-- FoodActivity -->
         <activity
             android:name=".FoodActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.SUB" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
-
         <!-- OtherActivity -->
         <activity
             android:name=".OtherActivity"

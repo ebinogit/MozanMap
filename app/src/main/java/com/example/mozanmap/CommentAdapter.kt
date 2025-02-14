@@ -1,16 +1,20 @@
+package com.example.mozanmap
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mozanmap.R
 
 class CommentAdapter(
-    private val comments: MutableList<String>,
-    private val onDeleteClicked: (position: Int) -> Unit
+    private val comments: MutableList<FoodActivity.CommentData>,
+    private val onDeleteClicked: (position: String) -> Unit
 ) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
-
+    class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val commentTextView: TextView = itemView.findViewById(R.id.commentTextView)
+        val deleteButton: Button? = itemView.findViewById(R.id.deleteButton)
+    }
     private var isAdmin = false // 管理者ステータス
 
     // 管理者ステータスを設定するメソッド
@@ -26,25 +30,15 @@ class CommentAdapter(
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         val comment = comments[position]
-        holder.commentTextView.text = comment
-
-        // 管理者の場合のみ削除ボタンを表示
+        holder.commentTextView.text = comment.comment
         if (isAdmin) {
-            holder.deleteButton.visibility = View.VISIBLE
-            holder.deleteButton.setOnClickListener {
-                onDeleteClicked(position)
+            holder.deleteButton?.visibility = View.VISIBLE
+            holder.deleteButton?.setOnClickListener {
+                onDeleteClicked(comment.key)
             }
         } else {
-            holder.deleteButton.visibility = View.GONE
+            holder.deleteButton?.visibility = View.GONE
         }
     }
-
-    override fun getItemCount(): Int {
-        return comments.size
-    }
-
-    class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val commentTextView: TextView = itemView.findViewById(R.id.commentTextView)
-        val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
-    }
+    override fun getItemCount(): Int = comments.size
 }
