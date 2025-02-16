@@ -12,9 +12,18 @@
         android:gravity="center"
         android:padding="10dp"
         tools:ignore="UseCompoundDrawables">
-        <FrameLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="450dp">
+            android:layout_height="100dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="10dp"
+            >
+            <ImageView
+                android:id="@+id/other_sub_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="center"/>
             <ImageButton
                 android:id="@+id/button_back"
                 android:layout_width="50dp"
@@ -24,54 +33,52 @@
                 android:importantForAccessibility="no"
                 android:background="@drawable/img_btn_bg1"
                 android:layout_margin="5dp"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                tools:ignore="UseCompoundDrawables">
             <TextView
-                android:id="@+id/class_view_text"
+                android:id="@+id/other_view_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/text_bg1"
                 android:padding="10dp"
-                android:layout_gravity="center_horizontal" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/class_sub_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    app:layoutManager="LinearLayoutManager"
-                    android:orientation="horizontal" />
+                android:layout_gravity="center_horizontal"
+                />
+        </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                tools:ignore="UseCompoundDrawables">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/other_sub_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:layoutManager="LinearLayoutManager"
+                android:orientation="horizontal" />
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="10dp">
+                <ImageView
+                    android:id="@+id/other_view_img"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    app:cardCornerRadius="10dp"
-                    >
-                    <ImageView
-                        android:id="@+id/class_view_img"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:background="#000"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:importantForAccessibility="no"
-                        />
+                    android:scaleType="centerCrop"
+                    android:background="#000"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:importantForAccessibility="no"
+                    />
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
-        </FrameLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/class_sub_item"
+            android:id="@+id/other_sub_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/class_view_bg"
+            android:background="@drawable/other_view_bg"
             app:layoutManager="LinearLayoutManager"
             />
     </LinearLayout>

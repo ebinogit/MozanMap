@@ -60,6 +60,11 @@
             android:name=".OtherActivity"
             android:exported="true">
         </activity>
+        <!-- OtherActivity2 -->
+        <activity
+            android:name=".OtherActivity2"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

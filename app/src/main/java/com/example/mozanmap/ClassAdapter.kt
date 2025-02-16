@@ -16,8 +16,8 @@ class ClassAdapter(
 ) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
 
     class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val image: ImageButton = itemView.findViewById(R.id.class_item_img)
-        val text: TextView = itemView.findViewById(R.id.class_item_text)
+        val image: ImageButton = itemView.findViewById(R.id.item_img)
+        val text: TextView = itemView.findViewById(R.id.item_text)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {

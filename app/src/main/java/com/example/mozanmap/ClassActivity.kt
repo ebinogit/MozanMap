@@ -18,7 +18,6 @@ class ClassActivity : AppCompatActivity() {
     private lateinit var menuContainer: RecyclerView
     private lateinit var itemContainer: RecyclerView
     private lateinit var textBuilding: TextView
-    private lateinit var imgBuilding: ImageView
     private lateinit var imgFloor: ImageView
     private lateinit var buttonBack: ImageButton
 
@@ -29,30 +28,14 @@ class ClassActivity : AppCompatActivity() {
         menuContainer = findViewById(R.id.class_sub_menu)
         itemContainer = findViewById(R.id.class_sub_item)
         textBuilding = findViewById(R.id.class_view_text)
-        imgBuilding = findViewById(R.id.class_sub_img)
         imgFloor = findViewById(R.id.class_view_img)
         buttonBack = findViewById(R.id.button_back)
 
         // Intent からデータを取得
         val building = intent.getStringExtra("title")
-        // 一致する施設を取得
-        if (building=="体育館") {
-            val items = OtherData.otherItems
-            for (item in items) {
-                when (item) {
-                    is ClassItem -> {
-                        val firstFloor = item.details[0]
-                        onBuilding(item, firstFloor)
-                    }
-                }
-            }
-        }else{
-            val selectedBuilding = ClassData.classItems.find { it.title == building }
-            val firstFloor = selectedBuilding!!.details[0]
-            onBuilding(selectedBuilding, firstFloor)
-        }
-    }
-    private fun onBuilding(selectedBuilding: ClassItem, firstFloor: ClassItem2) {
+        val selectedBuilding = ClassData.classItems.find { it.title == building }!!
+        val firstFloor = selectedBuilding.details.first()
+
         // RecyclerView の初期設定
         val itemAdapter = ClassSubItemAdapter(firstFloor.details)
         itemContainer.apply {
@@ -73,9 +56,6 @@ class ClassActivity : AppCompatActivity() {
         }
         // レイアウトのビューに設定
         textBuilding.text = selectedBuilding.title
-        Glide.with(this)
-            .load(selectedBuilding.imgID)
-            .into(imgBuilding)
         Glide.with(this)
             .load(firstFloor.imgID)
             .into(imgFloor)

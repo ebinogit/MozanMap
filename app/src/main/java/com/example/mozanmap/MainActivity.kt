@@ -1,5 +1,6 @@
 package com.example.mozanmap
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,6 +15,7 @@ import com.example.mozanmap.data.ClassData
 import com.example.mozanmap.data.FoodData
 import com.example.mozanmap.data.OtherData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.button.MaterialButton
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +44,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val logoutButton = findViewById<MaterialButton>(R.id.logout_button)
+        logoutButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
         // BottomSheetBehavior のセットアップ
         val bottomSheetLayout = findViewById<LinearLayout>(R.id.bottom_sheet)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
