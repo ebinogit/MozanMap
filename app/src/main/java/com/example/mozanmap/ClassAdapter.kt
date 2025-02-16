@@ -1,6 +1,7 @@
 package com.example.mozanmap
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,12 +21,12 @@ class ClassAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_class_btn, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_btn, parent, false)
         return ClassViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
+        Log.d("test", "test: $position,${classItems.size}")
         val classItem = classItems[position]
         // 設定
         holder.text.text = classItem.title

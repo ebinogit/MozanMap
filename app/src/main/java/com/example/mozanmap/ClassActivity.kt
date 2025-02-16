@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mozanmap.data.ClassData
+import com.example.mozanmap.data.ClassItem
+import com.example.mozanmap.data.ClassItem2
+import com.example.mozanmap.data.OtherData
 
 class ClassActivity : AppCompatActivity() {
 
@@ -31,19 +34,32 @@ class ClassActivity : AppCompatActivity() {
         buttonBack = findViewById(R.id.button_back)
 
         // Intent からデータを取得
-        val building = intent.getStringExtra("title") ?: "No building provided"
+        val building = intent.getStringExtra("title")
         // 一致する施設を取得
-        val selectedBuilding = ClassData.classItems.find { it.title == building }
-        //一階を取得
-        val firstFloor = selectedBuilding!!.details[0]
-
+        if (building=="体育館") {
+            val items = OtherData.otherItems
+            for (item in items) {
+                when (item) {
+                    is ClassItem -> {
+                        val firstFloor = item.details[0]
+                        onBuilding(item, firstFloor)
+                    }
+                }
+            }
+        }else{
+            val selectedBuilding = ClassData.classItems.find { it.title == building }
+            val firstFloor = selectedBuilding!!.details[0]
+            onBuilding(selectedBuilding, firstFloor)
+        }
+    }
+    private fun onBuilding(selectedBuilding: ClassItem, firstFloor: ClassItem2) {
         // RecyclerView の初期設定
         val itemAdapter = ClassSubItemAdapter(firstFloor.details)
         itemContainer.apply {
             setHasFixedSize(true)
             adapter = itemAdapter
         }
-        val menuAdapter = ClassSubMenuAdapter(selectedBuilding, firstFloor) { menu->
+        val menuAdapter = ClassSubMenuAdapter(selectedBuilding, firstFloor) { menu ->
             Log.d("ClassActivity", "Selected menu: $menu")
             val newFloor = selectedBuilding.details.find { it.title == menu }
             Glide.with(this)

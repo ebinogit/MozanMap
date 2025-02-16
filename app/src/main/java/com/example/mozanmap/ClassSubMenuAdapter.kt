@@ -44,12 +44,12 @@ class ClassSubMenuAdapter(
         }
     }
     private fun changeButton(btn:MaterialButton){
-        btn.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFc8c8"))
-        btn.setTextColor(Color.parseColor("#000000"))
+        btn.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF3232"))
+        btn.setTextColor(Color.parseColor("#ffffff"))
     }
     private fun changeButton2(btn: MaterialButton) {
-        btn.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF3232")) // 背景色
-        btn.setTextColor(Color.parseColor("#ffffff")) // テキスト色
+        btn.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FFc8c8")) // 背景色
+        btn.setTextColor(Color.parseColor("#000000")) // テキスト色
     }
     override fun getItemCount(): Int =building.details.size
 }

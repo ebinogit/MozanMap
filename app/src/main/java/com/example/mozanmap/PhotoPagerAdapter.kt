@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mozanmap.R
 
-class PhotoPagerAdapter(private val photoList: List<String>) : RecyclerView.Adapter<PhotoPagerAdapter.PhotoViewHolder>() {
+class PhotoPagerAdapter(
+    private val photo: List<Int>
+) : RecyclerView.Adapter<PhotoPagerAdapter.PhotoViewHolder>() {
 
-    inner class PhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class PhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val photoImageView: ImageView = itemView.findViewById(R.id.photoImageView)
     }
 
@@ -20,8 +21,8 @@ class PhotoPagerAdapter(private val photoList: List<String>) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-        Glide.with(holder.itemView.context).load(photoList[position]).into(holder.photoImageView)
+        Glide.with(holder.itemView.context).load(photo[position]).into(holder.photoImageView)
     }
 
-    override fun getItemCount() = photoList.size
+    override fun getItemCount() = photo.size
 }
