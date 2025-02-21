@@ -1,7 +1,6 @@
 package com.example.mozanmap
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mozanmap.data.OtherData
 import com.example.mozanmap.data.OtherItem
+import android.util.DisplayMetrics
+import android.util.TypedValue
+import androidx.cardview.widget.CardView
 
 class OtherActivity2 : AppCompatActivity() {
 
@@ -19,6 +21,7 @@ class OtherActivity2 : AppCompatActivity() {
     private lateinit var imgBuilding: ImageView
     private lateinit var imgFloor: ImageView
     private lateinit var buttonBack: ImageButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,5 +71,49 @@ class OtherActivity2 : AppCompatActivity() {
         buttonBack.setOnClickListener {
             finish()
         }
+//        // 画面サイズを取得
+//        val metrics = DisplayMetrics()
+//        windowManager.defaultDisplay.getMetrics(metrics)
+//        val screenWidth = metrics.widthPixels / metrics.density
+//        val screenHeight = metrics.heightPixels / metrics.density
+//
+//        // 目標のアスペクト比（例: 16:9）
+//        val referenceAspectRatio = 16f / 9f
+//        val screenAspectRatio = screenWidth / screenHeight
+//
+//        // 画面サイズに応じた調整関数
+//        fun adjustSize(baseDp: Float): Float {
+//            return if (screenAspectRatio > referenceAspectRatio) {
+//                baseDp * (referenceAspectRatio / screenAspectRatio)
+//            } else {
+//                baseDp * (screenAspectRatio / referenceAspectRatio)
+//            }
+//        }
+//
+//        // dp → px に変換
+//        fun Float.toPx(): Int {
+//            return TypedValue.applyDimension(
+//                TypedValue.COMPLEX_UNIT_DIP, this, resources.displayMetrics
+//            ).toInt()
+//        }
+//
+//        // ヘッダーの CardView の高さを調整
+//        val headerCard = findViewById<CardView>(R.id.test)
+//        val params = headerCard.layoutParams
+//        params.height = adjustSize(100f).toPx()
+//        headerCard.layoutParams = params
+//
+//        // メイン画像の CardView の高さを調整
+//        val contentCard = findViewById<CardView>(R.id.test2)
+//        val contentParams = contentCard.layoutParams
+//        contentParams.height = adjustSize(200f).toPx()
+//        contentCard.layoutParams = contentParams
+//
+//        // 戻るボタンのサイズを調整
+//        val backButton = findViewById<ImageButton>(R.id.button_back)
+//        val backParams = backButton.layoutParams
+//        backParams.width = adjustSize(50f).toPx()
+//        backParams.height = adjustSize(50f).toPx()
+//        backButton.layoutParams = backParams
     }
 }

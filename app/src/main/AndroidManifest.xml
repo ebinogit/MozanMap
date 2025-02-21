@@ -20,31 +20,28 @@
         <meta-data
             android:name="com.google.firebase.analytics.collection.enabled"
             android:value="true" />
-
-        <!-- LoginActivity -->
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true">
-            <!-- 最初に表示される画面をLoginActivityに設定 -->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-        <!-- RegisterActivity -->
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="true" />
         <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <!-- 最初に表示される画面をMainActivityに設定 -->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
+        </activity>
+        <!-- LoginActivity -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- RegisterActivity -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
         <!-- ClassActivity -->
         <activity
             android:name=".ClassActivity"

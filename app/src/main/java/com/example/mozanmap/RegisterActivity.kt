@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -11,12 +12,14 @@ import com.google.firebase.auth.FirebaseAuth
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var buttonBack: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         auth = FirebaseAuth.getInstance()
+        buttonBack = findViewById(R.id.backButton)
 
         val emailEditText = findViewById<EditText>(R.id.emailEditText)
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
@@ -40,6 +43,9 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "メールとパスワードを入力してください", Toast.LENGTH_SHORT).show()
             }
+        }
+        buttonBack.setOnClickListener {
+            finish()
         }
     }
 }

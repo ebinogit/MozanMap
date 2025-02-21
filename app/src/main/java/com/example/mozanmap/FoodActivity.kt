@@ -82,8 +82,8 @@ class FoodActivity : AppCompatActivity() {
         usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val isAdmin = snapshot.getValue(Boolean::class.java)?: false
-//                commentAdapter.setAdminStatus(isAdmin)
-                commentAdapter.setAdminStatus(true)
+                commentAdapter.setAdminStatus(isAdmin)
+//                commentAdapter.setAdminStatus(true)
             }
             override fun onCancelled(error: DatabaseError) {
             }

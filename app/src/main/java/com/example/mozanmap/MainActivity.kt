@@ -80,19 +80,20 @@ class MainActivity : AppCompatActivity() {
             customImageView.setButton(button.id, button)
 
             button.setOnClickListener {
-//                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-//                Log.d("MainActivity", "$currentId, clicked") // currentId を使用
-//                if (currentId in 0..14) {
-////                    val classContainer = findViewById<View>(R.id.class_button_container)
-//                    setupButtonClickListener(R.drawable.class_on, R.drawable.food_img, R.drawable.others_img, classContainer)
-//                    val recyclerView = findViewById<RecyclerView>(R.id.class_button_container)
-//                    val classAdapter = recyclerView.adapter as? ClassAdapter
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                if (currentId in 0..16) {
+//                    val classContainer = findViewById<View>(R.id.class_button_container)
+                    setupButtonClickListener(R.drawable.class_on, R.drawable.food_img, R.drawable.others_img, classContainer)
+                    val recyclerView = findViewById<RecyclerView>(R.id.class_button_container)
+                    val classAdapter = recyclerView.adapter as? ClassAdapter
 //                    classAdapter?.expandItemAt(currentId, true) // インスタンス経由で呼び出す
 //                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager?
 //                    layoutManager!!.scrollToPositionWithOffset(currentId, 0)
-//                } else {
-//                    setupButtonClickListener(R.drawable.class_img, R.drawable.food_img, R.drawable.others_on, othersContainer)
-//                }
+                } else if (currentId in 17..30) {
+                    setupButtonClickListener(R.drawable.class_img, R.drawable.food_img, R.drawable.others_on, othersContainer)
+                }else{
+                    setupButtonClickListener(R.drawable.class_img, R.drawable.food_on, R.drawable.others_img, foodContainer)
+                }
             }
             i++
         }

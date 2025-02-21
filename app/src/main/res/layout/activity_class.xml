@@ -59,7 +59,7 @@
                         android:id="@+id/class_view_img"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
+                        android:scaleType="fitXY"
                         android:background="#000"
                         android:foreground="?attr/selectableItemBackground"
                         android:importantForAccessibility="no"
